@@ -22,6 +22,7 @@ const updateOther = async (req, res) => {
     blog2,
     blog3,
     blog5,
+    services2,
     contact1
   } = req.body;
   
@@ -61,6 +62,41 @@ const updateOther = async (req, res) => {
   if (blog5) {
     if (blog5.title !== undefined) other.blog5.title = blog5.title;
     if (blog5.subtitle !== undefined) other.blog5.subtitle = blog5.subtitle;
+  }
+  
+  // Update services2 properties if they exist
+  if (services2) {
+    // Update heading
+    if (services2.heading) {
+      if (services2.heading.tag !== undefined) other.services2.heading.tag = services2.heading.tag;
+      if (services2.heading.title !== undefined) other.services2.heading.title = services2.heading.title;
+    }
+    
+    // Update tag image
+    if (services2.tagImage !== undefined) other.services2.tagImage = services2.tagImage;
+    
+    // Update services array
+    if (services2.services !== undefined) other.services2.services = services2.services;
+    
+    // Update background image
+    if (services2.backgroundImage !== undefined) other.services2.backgroundImage = services2.backgroundImage;
+    
+    // Update buttons
+    if (services2.buttons) {
+      if (services2.buttons.primary) {
+        if (services2.buttons.primary.text !== undefined) other.services2.buttons.primary.text = services2.buttons.primary.text;
+        if (services2.buttons.primary.link !== undefined) other.services2.buttons.primary.link = services2.buttons.primary.link;
+        if (services2.buttons.primary.btnClass !== undefined) other.services2.buttons.primary.btnClass = services2.buttons.primary.btnClass;
+        if (services2.buttons.primary.iconClass !== undefined) other.services2.buttons.primary.iconClass = services2.buttons.primary.iconClass;
+      }
+      
+      if (services2.buttons.secondary) {
+        if (services2.buttons.secondary.text !== undefined) other.services2.buttons.secondary.text = services2.buttons.secondary.text;
+        if (services2.buttons.secondary.link !== undefined) other.services2.buttons.secondary.link = services2.buttons.secondary.link;
+        if (services2.buttons.secondary.btnClass !== undefined) other.services2.buttons.secondary.btnClass = services2.buttons.secondary.btnClass;
+        if (services2.buttons.secondary.iconClass !== undefined) other.services2.buttons.secondary.iconClass = services2.buttons.secondary.iconClass;
+      }
+    }
   }
   
   // Update contact1 properties if they exist

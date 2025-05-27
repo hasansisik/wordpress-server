@@ -66,6 +66,105 @@ const OtherSchema = new mongoose.Schema(
         default: "Explore the insights and trends shaping our industry"
       }
     },
+    services2: {
+      heading: {
+        tag: {
+          type: String,
+          default: "What we offer"
+        },
+        title: {
+          type: String,
+          default: "Let's Discover Our Service <span class=\"fw-bold\">Our Service <br class=\"d-none d-lg-inline\" /> Features</span> Charter"
+        }
+      },
+      tagImage: {
+        type: String,
+        default: "/assets/imgs/features-1/dots.png"
+      },
+      services: {
+        type: Array,
+        default: [
+          {
+            icon: "/assets/imgs/service-2/icon-1.svg",
+            title: "Business Analytics",
+            description: "A business consultant provides expert advice and guidance to businesses on various aspects to improve their performance, efficiency, and profitability.",
+            iconBgColor: "bg-primary-soft"
+          },
+          {
+            icon: "/assets/imgs/service-2/icon-2.svg",
+            title: "Investment",
+            description: "A business consultant provides expert advice and guidance to businesses on various aspects to improve their performance, efficiency, and profitability.",
+            iconBgColor: "bg-success-soft"
+          },
+          {
+            icon: "/assets/imgs/service-2/icon-3.svg",
+            title: "Tax Advisory",
+            description: "A business consultant provides expert advice and guidance to businesses on various aspects to improve their performance, efficiency, and profitability.",
+            iconBgColor: "bg-warning-soft"
+          },
+          {
+            icon: "/assets/imgs/service-2/icon-4.svg",
+            title: "Automated reports",
+            description: "A business consultant provides expert advice and guidance to businesses on various aspects to improve their performance, efficiency, and profitability.",
+            iconBgColor: "bg-info-soft"
+          },
+          {
+            icon: "/assets/imgs/service-2/icon-5.svg",
+            title: "Funnel optimization",
+            description: "A business consultant provides expert advice and guidance to businesses on various aspects to improve their performance, efficiency, and profitability.",
+            iconBgColor: "bg-danger-soft"
+          },
+          {
+            icon: "/assets/imgs/service-2/icon-6.svg",
+            title: "Integrations",
+            description: "A business consultant provides expert advice and guidance to businesses on various aspects to improve their performance, efficiency, and profitability.",
+            iconBgColor: "bg-secondary-soft"
+          }
+        ]
+      },
+      backgroundImage: {
+        type: String,
+        default: "/assets/imgs/service-2/bg-line.png"
+      },
+      buttons: {
+        primary: {
+          text: {
+            type: String,
+            default: "Explore Now"
+          },
+          link: {
+            type: String,
+            default: "/page-services-1"
+          },
+          btnClass: {
+            type: String,
+            default: "btn-gradient"
+          },
+          iconClass: {
+            type: String,
+            default: "stroke-white"
+          }
+        },
+        secondary: {
+          text: {
+            type: String,
+            default: "Contact Us"
+          },
+          link: {
+            type: String,
+            default: "/page-contact-1"
+          },
+          btnClass: {
+            type: String,
+            default: "btn-outline-secondary"
+          },
+          iconClass: {
+            type: String,
+            default: "stroke-dark"
+          }
+        }
+      }
+    },
     contact1: {
       badge: {
         type: String,

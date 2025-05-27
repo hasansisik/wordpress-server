@@ -38,6 +38,7 @@ const heroRouter = require("./routers/hero");
 const ctaRouter = require("./routers/cta");
 const faqRouter = require("./routers/faq");
 const otherRouter = require("./routers/other");
+const generalRouter = require("./routers/general");
 
 //midlleware
 const notFoundMiddleware = require("./middleware/not-found");
@@ -50,6 +51,7 @@ app.use(cookieParser(process.env.JWT_SECRET_KEY));
 
 app.use(express.urlencoded({ extended: true }));
 
+// API routes - using consistent prefix
 app.use("/v1/auth", authRouter);
 app.use("/v1/blogs", blogRouter);
 app.use("/v1/services", serviceRouter);
@@ -59,6 +61,7 @@ app.use("/v1/hero", heroRouter);
 app.use("/v1/cta", ctaRouter);
 app.use("/v1/faq", faqRouter);
 app.use("/v1/other", otherRouter);
+app.use("/v1/general", generalRouter);
 
 app.use(notFoundMiddleware);
 app.use(erorHandlerMiddleware);

@@ -234,6 +234,22 @@ const OtherSchema = new mongoose.Schema(
         type: Boolean,
         default: true
       },
+      addressTitle: {
+        type: String,
+        default: "Adresimiz"
+      },
+      addressDescription: {
+        type: String,
+        default: "Bizi ziyaret edin"
+      },
+      address: {
+        type: String,
+        default: "Atatürk Cad. No:123, 34000 İstanbul, Türkiye"
+      },
+      showAddress: {
+        type: Boolean,
+        default: true
+      },
       services: {
         type: Array,
         default: [

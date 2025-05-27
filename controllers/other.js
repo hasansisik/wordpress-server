@@ -120,6 +120,10 @@ const updateOther = async (req, res) => {
     if (contact1.inquiryDescription !== undefined) other.contact1.inquiryDescription = contact1.inquiryDescription;
     if (contact1.phoneNumber !== undefined) other.contact1.phoneNumber = contact1.phoneNumber;
     if (contact1.showPhone !== undefined) other.contact1.showPhone = contact1.showPhone;
+    if (contact1.addressTitle !== undefined) other.contact1.addressTitle = contact1.addressTitle;
+    if (contact1.addressDescription !== undefined) other.contact1.addressDescription = contact1.addressDescription;
+    if (contact1.address !== undefined) other.contact1.address = contact1.address;
+    if (contact1.showAddress !== undefined) other.contact1.showAddress = contact1.showAddress;
     if (contact1.services !== undefined) other.contact1.services = contact1.services;
     if (contact1.buttonColor !== undefined) other.contact1.buttonColor = contact1.buttonColor;
     if (contact1.badgeColor !== undefined) other.contact1.badgeColor = contact1.badgeColor;

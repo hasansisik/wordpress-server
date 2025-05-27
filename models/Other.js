@@ -214,9 +214,9 @@ const OtherSchema = new mongoose.Schema(
         type: String,
         default: "destek@infinia.com"
       },
-      salesEmail: {
-        type: String,
-        default: "satis@infinia.com"
+      showEmail: {
+        type: Boolean,
+        default: true
       },
       inquiryTitle: {
         type: String,
@@ -230,6 +230,10 @@ const OtherSchema = new mongoose.Schema(
         type: String,
         default: "+01 (24) 568 900"
       },
+      showPhone: {
+        type: Boolean,
+        default: true
+      },
       services: {
         type: Array,
         default: [
@@ -240,6 +244,14 @@ const OtherSchema = new mongoose.Schema(
           "Finans Danışmanlığı",
           "İş promosyonu"
         ]
+      },
+      buttonColor: {
+        type: String,
+        default: "#6342EC"
+      },
+      badgeColor: {
+        type: String,
+        default: "rgba(99, 66, 236, 0.1)"
       }
     },
     services5: {

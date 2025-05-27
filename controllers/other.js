@@ -115,11 +115,14 @@ const updateOther = async (req, res) => {
     if (contact1.emailTitle !== undefined) other.contact1.emailTitle = contact1.emailTitle;
     if (contact1.emailDescription !== undefined) other.contact1.emailDescription = contact1.emailDescription;
     if (contact1.supportEmail !== undefined) other.contact1.supportEmail = contact1.supportEmail;
-    if (contact1.salesEmail !== undefined) other.contact1.salesEmail = contact1.salesEmail;
+    if (contact1.showEmail !== undefined) other.contact1.showEmail = contact1.showEmail;
     if (contact1.inquiryTitle !== undefined) other.contact1.inquiryTitle = contact1.inquiryTitle;
     if (contact1.inquiryDescription !== undefined) other.contact1.inquiryDescription = contact1.inquiryDescription;
     if (contact1.phoneNumber !== undefined) other.contact1.phoneNumber = contact1.phoneNumber;
+    if (contact1.showPhone !== undefined) other.contact1.showPhone = contact1.showPhone;
     if (contact1.services !== undefined) other.contact1.services = contact1.services;
+    if (contact1.buttonColor !== undefined) other.contact1.buttonColor = contact1.buttonColor;
+    if (contact1.badgeColor !== undefined) other.contact1.badgeColor = contact1.badgeColor;
   }
   
   // Update services5 properties if they exist

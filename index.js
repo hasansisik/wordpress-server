@@ -40,6 +40,7 @@ const faqRouter = require("./routers/faq");
 const otherRouter = require("./routers/other");
 const generalRouter = require("./routers/general");
 const contactFormRouter = require("./routers/contactForm");
+const pageRouter = require("./routers/page");
 
 //midlleware
 const notFoundMiddleware = require("./middleware/not-found");
@@ -64,6 +65,7 @@ app.use("/v1/faq", faqRouter);
 app.use("/v1/other", otherRouter);
 app.use("/v1/general", generalRouter);
 app.use("/v1/contact-form", contactFormRouter);
+app.use("/v1/page", pageRouter);
 
 app.use(notFoundMiddleware);
 app.use(erorHandlerMiddleware);

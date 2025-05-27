@@ -7,10 +7,7 @@ const { isAuthenticated } = require("../middleware/authMiddleware");
 // Public route to get FAQ
 router.route("/").get(getFaq);
 
-// Admin-only route to update FAQ
-router.route("/").put(
-  isAuthenticated,
-  updateFaq
-);
+// Temporarily disable authentication for development
+router.route("/").put(updateFaq);
 
 module.exports = router; 

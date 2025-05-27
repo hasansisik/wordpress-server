@@ -2,12 +2,6 @@ const createHttpError = require("http-errors");
 const jwt = require("jsonwebtoken");
 
 const isAuthenticated = async function (req, res, next) {
-  // Development bypass için kontrol
-  if (req.headers["x-special-auth"] === "development-bypass-auth") {
-    req.user = { id: 'bypass-user', role: 'admin' }; // Mock user bilgisi
-    return next();
-  }
-
   if (!req.headers["authorization"])
     return next(createHttpError.Unauthorized());
   const bearerToken = req.headers["authorization"];

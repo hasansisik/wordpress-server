@@ -91,6 +91,22 @@ const HeaderSchema = new mongoose.Schema(
       type: String,
       default: "Header1",
     },
+    workingHours: {
+      type: String,
+      default: "Mon-Fri: 10:00am - 09:00pm",
+    },
+    topBarColor: {
+      type: String,
+      default: "#3b71fe", // Default is primary color
+    },
+    topBarTextColor: {
+      type: String,
+      default: "#ffffff", // Default is white text
+    },
+    mobileMenuButtonColor: {
+      type: String,
+      default: "transparent", // Default is transparent
+    },
   },
   { timestamps: true }
 );

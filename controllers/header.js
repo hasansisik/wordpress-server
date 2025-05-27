@@ -26,7 +26,11 @@ const updateHeader = async (req, res) => {
     showActionButton,
     actionButtonText,
     actionButtonLink,
-    headerComponent
+    headerComponent,
+    workingHours,
+    topBarColor,
+    topBarTextColor,
+    mobileMenuButtonColor
   } = req.body;
   
   // Get the current header or create one if it doesn't exist
@@ -46,6 +50,10 @@ const updateHeader = async (req, res) => {
   if (actionButtonText) header.actionButtonText = actionButtonText;
   if (actionButtonLink) header.actionButtonLink = actionButtonLink;
   if (headerComponent) header.headerComponent = headerComponent;
+  if (workingHours) header.workingHours = workingHours;
+  if (topBarColor) header.topBarColor = topBarColor;
+  if (topBarTextColor) header.topBarTextColor = topBarTextColor;
+  if (mobileMenuButtonColor) header.mobileMenuButtonColor = mobileMenuButtonColor;
   
   await header.save();
   

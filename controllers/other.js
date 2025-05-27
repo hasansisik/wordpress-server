@@ -23,7 +23,9 @@ const updateOther = async (req, res) => {
     blog3,
     blog5,
     services2,
-    contact1
+    contact1,
+    services5,
+    project2
   } = req.body;
   
   // Get the current other or create one if it doesn't exist
@@ -118,6 +120,30 @@ const updateOther = async (req, res) => {
     if (contact1.inquiryDescription !== undefined) other.contact1.inquiryDescription = contact1.inquiryDescription;
     if (contact1.phoneNumber !== undefined) other.contact1.phoneNumber = contact1.phoneNumber;
     if (contact1.services !== undefined) other.contact1.services = contact1.services;
+  }
+  
+  // Update services5 properties if they exist
+  if (services5) {
+    if (services5.title !== undefined) other.services5.title = services5.title;
+    if (services5.subtitle !== undefined) other.services5.subtitle = services5.subtitle;
+    if (services5.description !== undefined) other.services5.description = services5.description;
+    if (services5.buttonText !== undefined) other.services5.buttonText = services5.buttonText;
+    if (services5.buttonLink !== undefined) other.services5.buttonLink = services5.buttonLink;
+    if (services5.linkText !== undefined) other.services5.linkText = services5.linkText;
+    if (services5.linkUrl !== undefined) other.services5.linkUrl = services5.linkUrl;
+    if (services5.backgroundColor !== undefined) other.services5.backgroundColor = services5.backgroundColor;
+    if (services5.titleColor !== undefined) other.services5.titleColor = services5.titleColor;
+    if (services5.buttonColor !== undefined) other.services5.buttonColor = services5.buttonColor;
+  }
+  
+  // Update project2 properties if they exist
+  if (project2) {
+    if (project2.title !== undefined) other.project2.title = project2.title;
+    if (project2.subtitle !== undefined) other.project2.subtitle = project2.subtitle;
+    if (project2.description !== undefined) other.project2.description = project2.description;
+    if (project2.backgroundColor !== undefined) other.project2.backgroundColor = project2.backgroundColor;
+    if (project2.titleColor !== undefined) other.project2.titleColor = project2.titleColor;
+    if (project2.badgeColor !== undefined) other.project2.badgeColor = project2.badgeColor;
   }
   
   await other.save();

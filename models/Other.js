@@ -241,6 +241,74 @@ const OtherSchema = new mongoose.Schema(
           "İş promosyonu"
         ]
       }
+    },
+    services5: {
+      title: {
+        type: String,
+        default: "Explore Our Projects"
+      },
+      subtitle: {
+        type: String,
+        default: "What we offers"
+      },
+      description: {
+        type: String,
+        default: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
+      },
+      buttonText: {
+        type: String,
+        default: "Get Free Quote"
+      },
+      buttonLink: {
+        type: String,
+        default: "#"
+      },
+      linkText: {
+        type: String,
+        default: "How We Work"
+      },
+      linkUrl: {
+        type: String,
+        default: "#"
+      },
+      backgroundColor: {
+        type: String,
+        default: "#ffffff"
+      },
+      titleColor: {
+        type: String,
+        default: "#333333"
+      },
+      buttonColor: {
+        type: String,
+        default: "#6342EC"
+      }
+    },
+    project2: {
+      title: {
+        type: String,
+        default: "Our featured projects"
+      },
+      subtitle: {
+        type: String,
+        default: "Recent work"
+      },
+      description: {
+        type: String,
+        default: "⚡Don't miss any contact. Stay connected."
+      },
+      backgroundColor: {
+        type: String,
+        default: "#f8f9fa"
+      },
+      titleColor: {
+        type: String,
+        default: "#333333"
+      },
+      badgeColor: {
+        type: String,
+        default: "rgba(99, 66, 236, 0.1)"
+      }
     }
   },
   { timestamps: true }

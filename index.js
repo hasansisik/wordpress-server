@@ -5,7 +5,6 @@ const cors = require("cors");
 const express = require("express");
 const app = express();
 
-
 // CORS configuration
 app.use(cors({
   origin: function(origin, callback) {
@@ -27,6 +26,7 @@ const cookieParser = require("cookie-parser");
 
 //database
 const connectDB = require("./config/connectDB");
+const setupAdminUser = require("./config/setupAdmin");
 
 //routers
 const authRouter = require("./routers/auth");
@@ -75,10 +75,13 @@ const port = process.env.PORT || 3040;
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URL);
+    // Setup admin user on first start (if doesn't exist)
+    await setupAdminUser();
+    
     app.listen(
       port,
       console.log(
-        `MongoDb Connection Successful,App started on port ${port} : ${process.env.NODE_ENV}`
+        `MongoDb Connection Successful, App started on port ${port} : ${process.env.NODE_ENV}`
       )
     );
   } catch (error) {

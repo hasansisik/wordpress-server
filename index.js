@@ -36,6 +36,7 @@ const headerRouter = require("./routers/header");
 const footerRouter = require("./routers/footer");
 const heroRouter = require("./routers/hero");
 const ctaRouter = require("./routers/cta");
+const faqRouter = require("./routers/faq");
 
 //midlleware
 const notFoundMiddleware = require("./middleware/not-found");
@@ -55,6 +56,7 @@ app.use("/v1/header", headerRouter);
 app.use("/v1/footer", footerRouter);
 app.use("/v1/hero", heroRouter);
 app.use("/v1/cta", ctaRouter);
+app.use("/v1/faq", faqRouter);
 
 app.use(notFoundMiddleware);
 app.use(erorHandlerMiddleware);

@@ -6,6 +6,87 @@ const FaqSchema = new mongoose.Schema(
       type: String,
       default: "faqs2"
     },
+    faqs1: {
+      heading: {
+        title: {
+          type: String,
+          default: "Frequently Asked Questions"
+        },
+        description: {
+          type: String,
+          default: "Find the answers to all of our most frequently asked questions"
+        },
+        titleColor: {
+          type: String,
+          default: "#111827"
+        },
+        descriptionColor: {
+          type: String,
+          default: "#6E6E6E"
+        }
+      },
+      mainImage: {
+        type: String,
+        default: "/assets/imgs/faqs-1/img-1.png"
+      },
+      supportItems: {
+        type: Array,
+        default: [
+          {
+            icon: "/assets/imgs/faqs-1/icon-1.png",
+            title: "Live chat support 24/7",
+            description: "More than 300 employees are ready to help you"
+          },
+          {
+            icon: "/assets/imgs/faqs-1/icon-2.png",
+            title: "Help desk support center",
+            description: "Via ticket system. 24/7 available."
+          },
+          {
+            icon: "/assets/imgs/faqs-1/icon-3.png",
+            title: "Book a demo",
+            description: "Live support via video call"
+          }
+        ]
+      },
+      questions: {
+        type: Array,
+        default: [
+          {
+            question: "The Future of SaaS: Emerging Trends to Watch",
+            answer: "Getting started is simple! Download the app from the App Store or Google Play Store, create an account using your email or social media login, and start making video calls instantly."
+          },
+          {
+            question: "Is the video call app free to use?",
+            answer: "Getting started is simple! Download the app from the App Store or Google Play Store, create an account using your email or social media login, and start making video calls instantly."
+          },
+          {
+            question: "What devices are compatible with the video call app?",
+            answer: "Getting started is simple! Download the app from the App Store or Google Play Store, create an account using your email or social media login, and start making video calls instantly."
+          },
+          {
+            question: "How can I ensure my video calls are secure?",
+            answer: "Getting started is simple! Download the app from the App Store or Google Play Store, create an account using your email or social media login, and start making video calls instantly."
+          },
+          {
+            question: "Can I share my screen during a video call?",
+            answer: "Getting started is simple! Download the app from the App Store or Google Play Store, create an account using your email or social media login, and start making video calls instantly."
+          }
+        ]
+      },
+      backgroundImage: {
+        type: String,
+        default: "/assets/imgs/faqs-1/img-bg-line.png"
+      },
+      numberColor: {
+        type: String,
+        default: "#6342EC"
+      },
+      numberBgColor: {
+        type: String,
+        default: "#ffffff"
+      }
+    },
     faqs2: {
       heading: {
         tag: {
@@ -19,7 +100,27 @@ const FaqSchema = new mongoose.Schema(
         description: {
           type: String,
           default: "Have any questions? We're here to assist you."
+        },
+        titleColor: {
+          type: String,
+          default: "#111827"
+        },
+        descriptionColor: {
+          type: String,
+          default: "#6E6E6E"
         }
+      },
+      tagVisible: {
+        type: Boolean,
+        default: true
+      },
+      tagBackgroundColor: {
+        type: String,
+        default: "#f1f0fe"
+      },
+      tagTextColor: {
+        type: String,
+        default: "#6342EC"
       },
       tagImage: {
         type: String,
@@ -84,7 +185,27 @@ const FaqSchema = new mongoose.Schema(
         description: {
           type: String,
           default: "Quick answers to questions you may have. Can't find what you're looking for? Get in touch with us."
+        },
+        titleColor: {
+          type: String,
+          default: "#111827"
+        },
+        descriptionColor: {
+          type: String,
+          default: "#6E6E6E"
         }
+      },
+      tagVisible: {
+        type: Boolean,
+        default: true
+      },
+      tagBackgroundColor: {
+        type: String,
+        default: "#f1f0fe"
+      },
+      tagTextColor: {
+        type: String,
+        default: "#6342EC"
       },
       buttons: {
         primary: {
@@ -95,6 +216,18 @@ const FaqSchema = new mongoose.Schema(
           link: {
             type: String,
             default: "#"
+          },
+          visible: {
+            type: Boolean,
+            default: true
+          },
+          backgroundColor: {
+            type: String,
+            default: ""
+          },
+          textColor: {
+            type: String,
+            default: "#FFFFFF"
           }
         },
         secondary: {
@@ -105,18 +238,24 @@ const FaqSchema = new mongoose.Schema(
           link: {
             type: String,
             default: "#"
+          },
+          visible: {
+            type: Boolean,
+            default: true
+          },
+          textColor: {
+            type: String,
+            default: "#111827"
           }
         }
       },
-      images: {
-        image1: {
-          type: String,
-          default: "/assets/imgs/faqs-3/img-1.png"
-        },
-        image2: {
-          type: String,
-          default: "/assets/imgs/faqs-3/img-2.png"
-        }
+      leftImage1: {
+        type: String,
+        default: "/assets/imgs/faqs-3/img-1.png"
+      },
+      leftImage2: {
+        type: String,
+        default: "/assets/imgs/faqs-3/img-2.png"
       },
       tagImage: {
         type: String,

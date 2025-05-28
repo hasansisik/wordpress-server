@@ -3,7 +3,7 @@ const Token = require("../models/Token");
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
 const { generateToken } = require("../services/token.service");
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 //Email
 const verifyEmail = async (req, res) => {
@@ -12,21 +12,21 @@ const verifyEmail = async (req, res) => {
 
     if (!email || !verificationCode) {
       return res.status(StatusCodes.BAD_REQUEST).json({
-        message: "Email ve doğrulama kodu gereklidir."
+        message: "Email ve doğrulama kodu gereklidir.",
       });
     }
 
-    const user = await User.findOne({ email }).select('auth isVerified');
+    const user = await User.findOne({ email }).select("auth isVerified");
 
     if (!user) {
       return res.status(StatusCodes.NOT_FOUND).json({
-        message: "Bu email adresi ile kayıtlı kullanıcı bulunamadı."
+        message: "Bu email adresi ile kayıtlı kullanıcı bulunamadı.",
       });
     }
 
     if (user.isVerified) {
       return res.status(StatusCodes.BAD_REQUEST).json({
-        message: "Bu hesap zaten doğrulanmış."
+        message: "Bu hesap zaten doğrulanmış.",
       });
     }
 
@@ -34,7 +34,7 @@ const verifyEmail = async (req, res) => {
 
     if (user.auth.verificationCode !== numericVerificationCode) {
       return res.status(StatusCodes.BAD_REQUEST).json({
-        message: "Geçersiz doğrulama kodu. Lütfen tekrar kontrol ediniz."
+        message: "Geçersiz doğrulama kodu. Lütfen tekrar kontrol ediniz.",
       });
     }
 
@@ -43,11 +43,12 @@ const verifyEmail = async (req, res) => {
     await user.save();
 
     return res.status(StatusCodes.OK).json({
-      message: "Email adresiniz başarıyla doğrulandı."
+      message: "Email adresiniz başarıyla doğrulandı.",
     });
   } catch (error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      message: "Email doğrulama işlemi sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyiniz."
+      message:
+        "Email doğrulama işlemi sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
     });
   }
 };
@@ -77,11 +78,13 @@ const againEmail = async (req, res) => {
 
 //Register (Admin Only)
 const register = async (req, res, next) => {
-  try {   
+  try {
     // Check if the requesting user is admin
     const admin = await User.findById(req.user.userId);
-    if (!admin || admin.role !== 'admin') {
-      throw new CustomError.UnauthorizedError("Bu işlemi sadece admin yapabilir");
+    if (!admin || admin.role !== "admin") {
+      throw new CustomError.UnauthorizedError(
+        "Bu işlemi sadece admin yapabilir"
+      );
     }
 
     const { name, email, password, picture, role, companyId } = req.body;
@@ -100,11 +103,11 @@ const register = async (req, res, next) => {
       email,
       profile: { picture },
       auth: {
-        password
+        password,
       },
-      role: role || 'user',
+      role: role || "user",
       isVerified: true, // Users are verified by default now
-      companyId: userCompanyId
+      companyId: userCompanyId,
     });
 
     await user.save();
@@ -117,7 +120,7 @@ const register = async (req, res, next) => {
         email: user.email,
         picture: user.profile.picture,
         role: user.role,
-        companyId: user.companyId
+        companyId: user.companyId,
       },
     });
   } catch (error) {
@@ -135,22 +138,24 @@ const login = async (req, res, next) => {
         "Lütfen e-posta adresinizi ve şifrenizi girin"
       );
     }
-    const user = await User.findOne({ email }).select('auth profile name email role status companyId');
+    const user = await User.findOne({ email }).select(
+      "auth profile name email role status companyId"
+    );
 
     if (!user) {
       throw new CustomError.UnauthenticatedError(
         "Ne yazık ki böyle bir kullanıcı yok"
       );
     }
-    
+
     const isPasswordCorrect = await user.auth.comparePassword(password);
 
     if (!isPasswordCorrect) {
       throw new CustomError.UnauthenticatedError("Kayıtlı şifreniz yanlış!");
     }
-    
+
     // Check if user is active
-    if (user.status === 'inactive') {
+    if (user.status === "inactive") {
       throw new CustomError.UnauthenticatedError(
         "Hesabınız aktif değil. Lütfen yönetici ile iletişime geçin."
       );
@@ -189,7 +194,6 @@ const login = async (req, res, next) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        picture: user.profile.picture,
         role: user.role,
         companyId: user.companyId,
         token: accessToken,
@@ -263,7 +267,7 @@ const resetPassword = async (req, res) => {
   if (!token || !email || !password) {
     throw new CustomError.BadRequestError("Please provide all values");
   }
-  const user = await User.findOne({ email }).select('auth');
+  const user = await User.findOne({ email }).select("auth");
 
   if (user) {
     const currentDate = new Date();
@@ -288,39 +292,51 @@ const editProfile = async (req, res) => {
     const requestingUser = await User.findById(req.user.userId);
     const { userId } = req.params;
     const targetUser = userId ? await User.findById(userId) : requestingUser;
-    
+
     if (!targetUser) {
       throw new CustomError.NotFoundError("User not found");
     }
 
     const { name, email, password, picture, companyId } = req.body;
-    
+
     // Check permissions
-    const isAdmin = requestingUser.role === 'admin';
-    const isOwnProfile = requestingUser._id.toString() === targetUser._id.toString();
+    const isAdmin = requestingUser.role === "admin";
+    const isOwnProfile =
+      requestingUser._id.toString() === targetUser._id.toString();
     const isSameCompany = requestingUser.companyId === targetUser.companyId;
-    
+
     // Only admin can edit other users, and only within the same company
     if (!isOwnProfile && (!isAdmin || !isSameCompany)) {
-      throw new CustomError.UnauthorizedError("Bu işlemi yapmak için yetkiniz yok");
+      throw new CustomError.UnauthorizedError(
+        "Bu işlemi yapmak için yetkiniz yok"
+      );
     }
-    
+
     // Only admin can change passwords
     if (password && !isAdmin) {
-      throw new CustomError.UnauthorizedError("Şifre değişikliği sadece admin tarafından yapılabilir");
+      throw new CustomError.UnauthorizedError(
+        "Şifre değişikliği sadece admin tarafından yapılabilir"
+      );
     }
 
     // Only admin can change company ID
     if (companyId && !isAdmin) {
-      throw new CustomError.UnauthorizedError("Şirket bilgisi değişikliği sadece admin tarafından yapılabilir");
+      throw new CustomError.UnauthorizedError(
+        "Şirket bilgisi değişikliği sadece admin tarafından yapılabilir"
+      );
     }
 
     if (name) targetUser.name = name;
     if (email && isAdmin) {
       // Check if new email already exists
-      const emailExists = await User.findOne({ email, _id: { $ne: targetUser._id } });
+      const emailExists = await User.findOne({
+        email,
+        _id: { $ne: targetUser._id },
+      });
       if (emailExists) {
-        throw new CustomError.BadRequestError("Bu e-posta adresi zaten kayıtlı.");
+        throw new CustomError.BadRequestError(
+          "Bu e-posta adresi zaten kayıtlı."
+        );
       }
       targetUser.email = email;
     }
@@ -339,18 +355,20 @@ const editProfile = async (req, res) => {
         email: targetUser.email,
         profile: targetUser.profile,
         role: targetUser.role,
-        companyId: targetUser.companyId
-      }
+        companyId: targetUser.companyId,
+      },
     });
   } catch (error) {
-    if (error instanceof CustomError.BadRequestError || 
-        error instanceof CustomError.NotFoundError ||
-        error instanceof CustomError.UnauthorizedError) {
+    if (
+      error instanceof CustomError.BadRequestError ||
+      error instanceof CustomError.NotFoundError ||
+      error instanceof CustomError.UnauthorizedError
+    ) {
       res.status(error.statusCode).json({ message: error.message });
     } else {
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ 
-        message: "Bir hata oluştu.", 
-        error: error.message 
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        message: "Bir hata oluştu.",
+        error: error.message,
       });
     }
   }
@@ -361,21 +379,22 @@ const getAllUsers = async (req, res) => {
   try {
     // Only get users from the same company as the requesting user
     const requestingUser = await User.findById(req.user.userId);
-    
+
     if (!requestingUser) {
-      return res.status(StatusCodes.UNAUTHORIZED).json({ 
-        message: "Kullanıcı bulunamadı" 
+      return res.status(StatusCodes.UNAUTHORIZED).json({
+        message: "Kullanıcı bulunamadı",
       });
     }
 
-    const users = await User.find({ companyId: requestingUser.companyId })
-      .select('name email role status createdAt companyId');
-    
+    const users = await User.find({
+      companyId: requestingUser.companyId,
+    }).select("name email role status createdAt companyId");
+
     res.status(StatusCodes.OK).json({ users });
   } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ 
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message: "Kullanıcılar alınırken bir hata oluştu",
-      error: error.message
+      error: error.message,
     });
   }
 };
@@ -384,28 +403,29 @@ const getAllUsers = async (req, res) => {
 const editUsers = async (req, res) => {
   try {
     const { userId } = req.params;
-    const { name, email, password, role, status, picture, companyId } = req.body;
+    const { name, email, password, role, status, picture, companyId } =
+      req.body;
 
     const admin = await User.findById(req.user.userId);
 
     // Check if the requesting user is admin
-    if (admin.role !== 'admin') {
-      return res.status(StatusCodes.FORBIDDEN).json({ 
-        message: "Bu işlemi sadece admin yapabilir" 
+    if (admin.role !== "admin") {
+      return res.status(StatusCodes.FORBIDDEN).json({
+        message: "Bu işlemi sadece admin yapabilir",
       });
     }
 
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(StatusCodes.NOT_FOUND).json({ 
-        message: "Kullanıcı bulunamadı" 
+      return res.status(StatusCodes.NOT_FOUND).json({
+        message: "Kullanıcı bulunamadı",
       });
     }
 
     // Admin can only edit users in their company
     if (user.companyId !== admin.companyId) {
-      return res.status(StatusCodes.FORBIDDEN).json({ 
-        message: "Farklı şirket kullanıcılarını düzenleyemezsiniz" 
+      return res.status(StatusCodes.FORBIDDEN).json({
+        message: "Farklı şirket kullanıcılarını düzenleyemezsiniz",
       });
     }
 
@@ -415,7 +435,9 @@ const editUsers = async (req, res) => {
       // Check if new email already exists
       const emailExists = await User.findOne({ email, _id: { $ne: userId } });
       if (emailExists) {
-        throw new CustomError.BadRequestError("Bu e-posta adresi zaten kayıtlı.");
+        throw new CustomError.BadRequestError(
+          "Bu e-posta adresi zaten kayıtlı."
+        );
       }
       user.email = email;
     }
@@ -430,7 +452,7 @@ const editUsers = async (req, res) => {
 
     await user.save();
 
-    res.status(StatusCodes.OK).json({ 
+    res.status(StatusCodes.OK).json({
       message: "Kullanıcı bilgileri güncellendi",
       user: {
         _id: user._id,
@@ -439,14 +461,14 @@ const editUsers = async (req, res) => {
         role: user.role,
         status: user.status,
         profile: user.profile,
-        companyId: user.companyId
-      }
+        companyId: user.companyId,
+      },
     });
   } catch (error) {
     console.error("Error in editUsers:", error);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message: "Kullanıcı güncellenirken bir hata oluştu",
-      error: error.message
+      error: error.message,
     });
   }
 };
@@ -456,37 +478,37 @@ const deleteUser = async (req, res) => {
   try {
     const { userId } = req.params;
     const admin = await User.findById(req.user.userId);
-  
+
     // Check if the requesting user is admin
-    if (admin.role !== 'admin') {
-      return res.status(StatusCodes.FORBIDDEN).json({ 
-        message: "Bu işlemi sadece admin yapabilir" 
+    if (admin.role !== "admin") {
+      return res.status(StatusCodes.FORBIDDEN).json({
+        message: "Bu işlemi sadece admin yapabilir",
       });
     }
 
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(StatusCodes.NOT_FOUND).json({ 
-        message: "Kullanıcı bulunamadı" 
+      return res.status(StatusCodes.NOT_FOUND).json({
+        message: "Kullanıcı bulunamadı",
       });
     }
 
     // Admin can only delete users in their company
     if (user.companyId !== admin.companyId) {
-      return res.status(StatusCodes.FORBIDDEN).json({ 
-        message: "Farklı şirket kullanıcılarını silemezsiniz" 
+      return res.status(StatusCodes.FORBIDDEN).json({
+        message: "Farklı şirket kullanıcılarını silemezsiniz",
       });
     }
 
     await User.findByIdAndDelete(userId);
 
-    res.status(StatusCodes.OK).json({ 
-      message: "Kullanıcı başarıyla silindi" 
+    res.status(StatusCodes.OK).json({
+      message: "Kullanıcı başarıyla silindi",
     });
   } catch (error) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message: "Kullanıcı silinirken bir hata oluştu",
-      error: error.message
+      error: error.message,
     });
   }
 };

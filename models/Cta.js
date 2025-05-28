@@ -11,6 +11,18 @@ const CtaSchema = new mongoose.Schema(
         type: String,
         default: "About us"
       },
+      badgeVisible: {
+        type: Boolean,
+        default: true
+      },
+      badgeBackgroundColor: {
+        type: String,
+        default: "#f1f0fe"
+      },
+      badgeTextColor: {
+        type: String,
+        default: "#6342EC"
+      },
       title: {
         type: String,
         default: "Together, We are <span class=\"fw-bold\">Shaping </span> a<br /> <span class=\"fw-bold\">Promising</span> Future<span class=\"fw-bold\">.</span>"
@@ -59,6 +71,52 @@ const CtaSchema = new mongoose.Schema(
       socialLabel: {
         type: String,
         default: "Follow us:"
+      },
+      buttons: {
+        primary: {
+          visible: {
+            type: Boolean,
+            default: true
+          },
+          text: {
+            type: String,
+            default: "Get Started"
+          },
+          link: {
+            type: String,
+            default: "#"
+          },
+          backgroundColor: {
+            type: String,
+            default: ""
+          },
+          textColor: {
+            type: String,
+            default: "#FFFFFF"
+          }
+        },
+        secondary: {
+          visible: {
+            type: Boolean,
+            default: true
+          },
+          text: {
+            type: String,
+            default: "Learn More"
+          },
+          link: {
+            type: String,
+            default: "#"
+          },
+          backgroundColor: {
+            type: String,
+            default: "transparent"
+          },
+          textColor: {
+            type: String,
+            default: "#111827"
+          }
+        }
       }
     },
     cta4: {
@@ -90,6 +148,18 @@ const CtaSchema = new mongoose.Schema(
         title: {
           type: String,
           default: "Custom Services For Your Business"
+        },
+        visible: {
+          type: Boolean,
+          default: true
+        },
+        smallColor: {
+          type: String,
+          default: "#6342EC"
+        },
+        titleColor: {
+          type: String,
+          default: "#111827"
         }
       },
       description: {
@@ -114,6 +184,18 @@ const CtaSchema = new mongoose.Schema(
           link: {
             type: String,
             default: "#"
+          },
+          visible: {
+            type: Boolean,
+            default: true
+          },
+          backgroundColor: {
+            type: String,
+            default: ""
+          },
+          textColor: {
+            type: String,
+            default: "#FFFFFF"
           }
         },
         secondary: {
@@ -124,52 +206,90 @@ const CtaSchema = new mongoose.Schema(
           link: {
             type: String,
             default: "#"
+          },
+          visible: {
+            type: Boolean,
+            default: true
+          },
+          backgroundColor: {
+            type: String,
+            default: "transparent"
+          },
+          textColor: {
+            type: String,
+            default: "#111827"
           }
         }
       }
     },
-    cta9: {
-      videoGuide: {
-        image: {
-          type: String,
-          default: "/assets/imgs/cta-14/img-1.png"
-        },
-        videoId: {
-          type: String,
-          default: "gXFATcwrO-U"
-        },
-        buttonText: {
-          type: String,
-          default: "Video Guide"
-        }
+    cta3: {
+      tag: {
+        type: String,
+        default: "Our History"
       },
-      vectors: {
-        vector1: {
-          type: String,
-          default: "/assets/imgs/cta-14/vector.svg"
-        },
-        vector2: {
-          type: String,
-          default: "/assets/imgs/cta-14/vector-2.svg"
-        },
-        bgLine: {
-          type: String,
-          default: "/assets/imgs/service-2/bg-line.png"
-        }
+      tagVisible: {
+        type: Boolean,
+        default: true
       },
-      heading: {
-        tag: {
-          type: String,
-          default: "How It Work"
-        },
-        title: {
-          type: String,
-          default: "What are the <span class=\"fw-bold\">Steps Involved</span> in <br /> Our <span class=\"fw-bold\">Process?</span>"
-        }
+      tagBackgroundColor: {
+        type: String,
+        default: "#f1f0fe"
+      },
+      tagTextColor: {
+        type: String,
+        default: "#6342EC"
+      },
+      title: {
+        type: String,
+        default: "A Journey of Innovation and Growth"
+      },
+      titleColor: {
+        type: String,
+        default: "#111827"
+      },
+      subtitle: {
+        type: String,
+        default: "Loved By Developers Trusted By Enterprises"
+      },
+      subtitleColor: {
+        type: String,
+        default: "#6E6E6E"
+      },
+      description: {
+        type: String,
+        default: "Was founded with a passion for technology and a desire to make a difference in the digital world. From our humble beginnings, we have grown into a reputable and sought-after web development agency, serving a diverse range of clients across various industries. Over the years, we have successfully delivered countless projects, each one a testament to our dedication, expertise, and innovative approach. Our journey has been marked by continuous growth, learning, and adaptation and we are proud of the milestones we have achieved along the way."
+      },
+      descriptionColor: {
+        type: String,
+        default: "#111827"
       },
       tagImage: {
         type: String,
         default: "/assets/imgs/features-1/dots.png"
+      },
+      buttons: {
+        primary: {
+          visible: {
+            type: Boolean,
+            default: true
+          },
+          text: {
+            type: String,
+            default: "Get Started"
+          },
+          link: {
+            type: String,
+            default: "#"
+          },
+          backgroundColor: {
+            type: String,
+            default: ""
+          },
+          textColor: {
+            type: String,
+            default: "#FFFFFF"
+          }
+        }
       }
     }
   },

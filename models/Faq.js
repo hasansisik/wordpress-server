@@ -195,6 +195,14 @@ const FaqSchema = new mongoose.Schema(
           default: "#6E6E6E"
         }
       },
+      descriptionVisible: {
+        type: Boolean,
+        default: true
+      },
+      leftImagesVisible: {
+        type: Boolean,
+        default: true
+      },
       tagVisible: {
         type: Boolean,
         default: true

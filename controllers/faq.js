@@ -92,6 +92,10 @@ const updateFaq = async (req, res) => {
     if (faqs3.tagBackgroundColor !== undefined) faq.faqs3.tagBackgroundColor = faqs3.tagBackgroundColor;
     if (faqs3.tagTextColor !== undefined) faq.faqs3.tagTextColor = faqs3.tagTextColor;
     if (faqs3.tagImage !== undefined) faq.faqs3.tagImage = faqs3.tagImage;
+
+    // Update description and image visibility
+    if (faqs3.descriptionVisible !== undefined) faq.faqs3.descriptionVisible = faqs3.descriptionVisible;
+    if (faqs3.leftImagesVisible !== undefined) faq.faqs3.leftImagesVisible = faqs3.leftImagesVisible;
     
     // Update button properties
     if (faqs3.buttons) {

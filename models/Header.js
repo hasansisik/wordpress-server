@@ -107,6 +107,18 @@ const HeaderSchema = new mongoose.Schema(
       type: String,
       default: "transparent", // Default is transparent
     },
+    phoneIconBgColor: {
+      type: String,
+      default: "#3b71fe", // Default is primary color
+    },
+    phoneIconColor: {
+      type: String,
+      default: "#ffffff", // Default is white
+    },
+    phoneQuestionText: {
+      type: String,
+      default: "Have Any Questions?", // Default text
+    }
   },
   { timestamps: true }
 );

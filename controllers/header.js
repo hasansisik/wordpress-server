@@ -30,7 +30,10 @@ const updateHeader = async (req, res) => {
     workingHours,
     topBarColor,
     topBarTextColor,
-    mobileMenuButtonColor
+    mobileMenuButtonColor,
+    phoneIconBgColor,
+    phoneIconColor,
+    phoneQuestionText
   } = req.body;
   
   // Get the current header or create one if it doesn't exist
@@ -54,6 +57,9 @@ const updateHeader = async (req, res) => {
   if (topBarColor) header.topBarColor = topBarColor;
   if (topBarTextColor) header.topBarTextColor = topBarTextColor;
   if (mobileMenuButtonColor) header.mobileMenuButtonColor = mobileMenuButtonColor;
+  if (phoneIconBgColor) header.phoneIconBgColor = phoneIconBgColor;
+  if (phoneIconColor) header.phoneIconColor = phoneIconColor;
+  if (phoneQuestionText) header.phoneQuestionText = phoneQuestionText;
   
   await header.save();
   

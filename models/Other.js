@@ -482,6 +482,18 @@ const OtherSchema = new mongoose.Schema(
       buttonTextColor: {
         type: String,
         default: "#FFFFFF"
+      },
+      filterAllText: {
+        type: String,
+        default: "Hepsi"
+      },
+      filterButtonColor: {
+        type: String,
+        default: "#6342EC"
+      },
+      filterButtonTextColor: {
+        type: String,
+        default: "#FFFFFF"
       }
     },
     project2: {

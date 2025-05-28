@@ -184,6 +184,9 @@ const updateOther = async (req, res) => {
     if (services5.backgroundColor !== undefined) other.services5.backgroundColor = services5.backgroundColor;
     if (services5.buttonColor !== undefined) other.services5.buttonColor = services5.buttonColor;
     if (services5.buttonTextColor !== undefined) other.services5.buttonTextColor = services5.buttonTextColor;
+    if (services5.filterAllText !== undefined) other.services5.filterAllText = services5.filterAllText;
+    if (services5.filterButtonColor !== undefined) other.services5.filterButtonColor = services5.filterButtonColor;
+    if (services5.filterButtonTextColor !== undefined) other.services5.filterButtonTextColor = services5.filterButtonTextColor;
   }
   
   // Update project2 properties if they exist

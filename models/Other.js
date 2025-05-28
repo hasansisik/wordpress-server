@@ -11,17 +11,41 @@ const OtherSchema = new mongoose.Schema(
         type: String,
         default: "From Blog"
       },
+      badgeVisible: {
+        type: Boolean,
+        default: true
+      },
+      badgeBackgroundColor: {
+        type: String,
+        default: "#f1f0fe"
+      },
+      badgeTextColor: {
+        type: String,
+        default: "#6342EC"
+      },
       title: {
         type: String,
         default: "Our Latest Articles"
+      },
+      titleColor: {
+        type: String,
+        default: "#111827"
       },
       subtitle: {
         type: String,
         default: "Explore the insights and trends shaping our industry"
       },
+      subtitleColor: {
+        type: String,
+        default: "#6E6E6E"
+      },
       seeAllLink: {
         type: String,
         default: "#"
+      },
+      backgroundColor: {
+        type: String,
+        default: "#ffffff"
       }
     },
     blog2: {
@@ -29,17 +53,53 @@ const OtherSchema = new mongoose.Schema(
         type: String,
         default: "From Blog"
       },
+      badgeVisible: {
+        type: Boolean,
+        default: true
+      },
+      badgeBackgroundColor: {
+        type: String,
+        default: "#f1f0fe"
+      },
+      badgeTextColor: {
+        type: String,
+        default: "#6342EC"
+      },
       title: {
         type: String,
         default: "Our Latest News and Articles"
+      },
+      titleColor: {
+        type: String,
+        default: "#111827"
       },
       subtitle: {
         type: String,
         default: "Explore the insights and trends shaping our industry. 🔥"
       },
+      subtitleColor: {
+        type: String,
+        default: "#6E6E6E"
+      },
       seeAllLink: {
         type: String,
         default: "#"
+      },
+      seeAllLinkText: {
+        type: String,
+        default: "See all articles"
+      },
+      seeAllButtonVisible: {
+        type: Boolean,
+        default: true
+      },
+      seeAllButtonColor: {
+        type: String,
+        default: "#111827"
+      },
+      backgroundColor: {
+        type: String,
+        default: "#ffffff"
       },
       bgLine: {
         type: String,
@@ -51,6 +111,14 @@ const OtherSchema = new mongoose.Schema(
         type: String,
         default: "Related Posts"
       },
+      titleColor: {
+        type: String,
+        default: "#111827"
+      },
+      backgroundColor: {
+        type: String,
+        default: "#ffffff"
+      },
       bgLine: {
         type: String,
         default: "/assets/imgs/team-1/bg-line.png"
@@ -61,9 +129,21 @@ const OtherSchema = new mongoose.Schema(
         type: String,
         default: "Trending News"
       },
+      titleColor: {
+        type: String,
+        default: "#111827"
+      },
       subtitle: {
         type: String,
         default: "Explore the insights and trends shaping our industry"
+      },
+      subtitleColor: {
+        type: String,
+        default: "#6E6E6E"
+      },
+      backgroundColor: {
+        type: String,
+        default: "#ffffff"
       }
     },
     services2: {
@@ -72,9 +152,25 @@ const OtherSchema = new mongoose.Schema(
           type: String,
           default: "What we offer"
         },
+        tagVisible: {
+          type: Boolean,
+          default: true
+        },
+        tagBackgroundColor: {
+          type: String,
+          default: "#f1f0fe"
+        },
+        tagTextColor: {
+          type: String,
+          default: "#6342EC"
+        },
         title: {
           type: String,
           default: "Let's Discover Our Service <span class=\"fw-bold\">Our Service <br class=\"d-none d-lg-inline\" /> Features</span> Charter"
+        },
+        titleColor: {
+          type: String,
+          default: "#111827"
         }
       },
       tagImage: {
@@ -122,6 +218,10 @@ const OtherSchema = new mongoose.Schema(
           }
         ]
       },
+      backgroundColor: {
+        type: String,
+        default: "#ffffff"
+      },
       backgroundImage: {
         type: String,
         default: "/assets/imgs/service-2/bg-line.png"
@@ -143,6 +243,18 @@ const OtherSchema = new mongoose.Schema(
           iconClass: {
             type: String,
             default: "stroke-white"
+          },
+          visible: {
+            type: Boolean,
+            default: true
+          },
+          backgroundColor: {
+            type: String,
+            default: "#6342EC"
+          },
+          textColor: {
+            type: String,
+            default: "#FFFFFF"
           }
         },
         secondary: {
@@ -161,6 +273,18 @@ const OtherSchema = new mongoose.Schema(
           iconClass: {
             type: String,
             default: "stroke-dark"
+          },
+          visible: {
+            type: Boolean,
+            default: true
+          },
+          backgroundColor: {
+            type: String,
+            default: "transparent"
+          },
+          textColor: {
+            type: String,
+            default: "#111827"
           }
         }
       }
@@ -170,13 +294,29 @@ const OtherSchema = new mongoose.Schema(
         type: String,
         default: "İletişime Geçin"
       },
+      badgeVisible: {
+        type: Boolean,
+        default: true
+      },
       title: {
         type: String,
         default: "Ekibimiz İle İletişime Geçin"
       },
+      titleColor: {
+        type: String,
+        default: "#111827"
+      },
       description: {
         type: String,
         default: "Yardıma hazır uzmanlarımızla kapsamlı bir hizmet ajansıyız. <br />24 saat içinde sizinle iletişime geçeceğiz."
+      },
+      descriptionColor: {
+        type: String,
+        default: "#6E6E6E"
+      },
+      backgroundColor: {
+        type: String,
+        default: "#ffffff"
       },
       formTitle: {
         type: String,
@@ -265,6 +405,10 @@ const OtherSchema = new mongoose.Schema(
         type: String,
         default: "#6342EC"
       },
+      buttonTextColor: {
+        type: String,
+        default: "#FFFFFF"
+      },
       badgeColor: {
         type: String,
         default: "rgba(99, 66, 236, 0.1)"
@@ -275,17 +419,41 @@ const OtherSchema = new mongoose.Schema(
         type: String,
         default: "Explore Our Projects"
       },
+      titleColor: {
+        type: String,
+        default: "#333333"
+      },
       subtitle: {
         type: String,
         default: "What we offers"
+      },
+      subtitleVisible: {
+        type: Boolean,
+        default: true
+      },
+      subtitleBackgroundColor: {
+        type: String,
+        default: "#f1f0fe"
+      },
+      subtitleTextColor: {
+        type: String,
+        default: "#6342EC"
       },
       description: {
         type: String,
         default: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
       },
+      descriptionColor: {
+        type: String,
+        default: "#6E6E6E"
+      },
       buttonText: {
         type: String,
         default: "Get Free Quote"
+      },
+      buttonVisible: {
+        type: Boolean,
+        default: true
       },
       buttonLink: {
         type: String,
@@ -295,6 +463,10 @@ const OtherSchema = new mongoose.Schema(
         type: String,
         default: "How We Work"
       },
+      linkVisible: {
+        type: Boolean,
+        default: true
+      },
       linkUrl: {
         type: String,
         default: "#"
@@ -303,13 +475,13 @@ const OtherSchema = new mongoose.Schema(
         type: String,
         default: "#ffffff"
       },
-      titleColor: {
-        type: String,
-        default: "#333333"
-      },
       buttonColor: {
         type: String,
         default: "#6342EC"
+      },
+      buttonTextColor: {
+        type: String,
+        default: "#FFFFFF"
       }
     },
     project2: {
@@ -317,25 +489,37 @@ const OtherSchema = new mongoose.Schema(
         type: String,
         default: "Our featured projects"
       },
+      titleColor: {
+        type: String,
+        default: "#333333"
+      },
       subtitle: {
         type: String,
         default: "Recent work"
+      },
+      subtitleVisible: {
+        type: Boolean,
+        default: true
+      },
+      subtitleBackgroundColor: {
+        type: String,
+        default: "rgba(99, 66, 236, 0.1)"
+      },
+      subtitleTextColor: {
+        type: String,
+        default: "#6342EC"
       },
       description: {
         type: String,
         default: "⚡Don't miss any contact. Stay connected."
       },
+      descriptionColor: {
+        type: String,
+        default: "#6E6E6E"
+      },
       backgroundColor: {
         type: String,
         default: "#f8f9fa"
-      },
-      titleColor: {
-        type: String,
-        default: "#333333"
-      },
-      badgeColor: {
-        type: String,
-        default: "rgba(99, 66, 236, 0.1)"
       }
     }
   },

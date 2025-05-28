@@ -24,6 +24,7 @@ const BlogSchema = new mongoose.Schema(
     date: { type: String },
     content: { type: BlogContentSchema, required: true },
     link: { type: String },
+    premium: { type: Boolean, default: false },
     user: {
       type: mongoose.Schema.ObjectId,
       ref: "User",

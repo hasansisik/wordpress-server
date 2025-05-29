@@ -12,12 +12,14 @@ const {
   getAllUsers,
   editUsers,
   deleteUser,
+  registerUser,
 } = require("../controllers/auth");
 const { isAuthenticated } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
 router.post("/register",isAuthenticated, register);
+router.post("/register-user", registerUser);
 router.post("/login", login);
 router.get("/me", isAuthenticated, getMyProfile);
 router.get("/logout", isAuthenticated, logout);

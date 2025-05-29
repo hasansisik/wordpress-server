@@ -3,7 +3,7 @@ const Token = require("../models/Token");
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
 const { generateToken } = require("../services/token.service");
-const bcrypt = require("bcrypt");
+const { sendResetPasswordEmail, sendVerificationEmail } = require("../helpers");
 
 //Email
 const verifyEmail = async (req, res) => {
@@ -233,32 +233,36 @@ const logout = async (req, res, next) => {
 //Forgot Password
 const forgotPassword = async (req, res) => {
   const { email } = req.body;
+
   if (!email) {
-    throw new CustomError.BadRequestError("Please provide valid email");
+    throw new CustomError.BadRequestError("Lütfen e-posta adresinizi girin.");
   }
 
   const user = await User.findOne({ email });
 
   if (user) {
-    const passwordToken = crypto.randomBytes(70).toString("hex");
-    // send email
+    const passwordToken = Math.floor(1000 + Math.random() * 9000);
+
     await sendResetPasswordEmail({
       name: user.name,
       email: user.email,
-      token: passwordToken,
+      passwordToken: passwordToken,
     });
 
     const tenMinutes = 1000 * 60 * 10;
     const passwordTokenExpirationDate = new Date(Date.now() + tenMinutes);
 
-    user.auth.passwordToken = passwordToken;
-    user.auth.passwordTokenExpirationDate = passwordTokenExpirationDate;
+    user.passwordToken = passwordToken;
+    user.passwordTokenExpirationDate = passwordTokenExpirationDate;
+
     await user.save();
+  } else {
+    throw new CustomError.BadRequestError("Kullanıcı bulunamadı.");
   }
 
-  res
-    .status(StatusCodes.OK)
-    .json({ msg: "Please check your email for reset password link" });
+  res.status(StatusCodes.OK).json({
+    message: "Şifre sıfırlama bağlantısı için lütfen e-postanızı kontrol edin.",
+  });
 };
 
 //Reset Password
@@ -513,6 +517,70 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const registerUser = async (req, res, next) => {
+  try {
+    const { name, email, password } = req.body;
+    console.log(name, email, password);
+
+    //check email
+    const emailAlreadyExists = await User.findOne({ email });
+    if (emailAlreadyExists) {
+      throw new CustomError.BadRequestError("Bu e-posta adresi zaten kayıtlı.");
+    }
+
+    //token create
+    const verificationCode = Math.floor(1000 + Math.random() * 9000);
+
+    const user = new User({
+      name,
+      email,
+      auth: {
+        password,
+        verificationCode
+      }
+    });
+
+    await user.save();
+
+    const accessToken = await generateToken(
+      { userId: user._id },
+      "1d",
+      process.env.ACCESS_TOKEN_SECRET
+    );
+    const refreshToken = await generateToken(
+      { userId: user._id },
+      "30d",
+      process.env.REFRESH_TOKEN_SECRET
+    );
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      path: "/v1/auth/refreshtoken",
+      maxAge: 30 * 24 * 60 * 60 * 1000, //30 days
+    });
+
+    await sendVerificationEmail({
+      name: user.name,
+      email: user.email,
+      verificationCode: user.auth.verificationCode,
+    });
+
+    res.json({
+      message:
+        "Kullanıcı başarıyla oluşturuldu. Lütfen e-posta adresinizi doğrulayınız.",
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        token: accessToken,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -526,4 +594,5 @@ module.exports = {
   getAllUsers,
   editUsers,
   deleteUser,
+  registerUser,
 };

@@ -13,6 +13,7 @@ const {
   editUsers,
   deleteUser,
   registerUser,
+  setPremiumStatus,
 } = require("../controllers/auth");
 const { isAuthenticated } = require("../middleware/authMiddleware");
 
@@ -32,5 +33,6 @@ router.put("/profile", isAuthenticated, editProfile);
 router.get("/users", isAuthenticated, getAllUsers);
 router.put("/users/:userId", isAuthenticated, editUsers);
 router.delete("/users/:userId", isAuthenticated, deleteUser);
+router.post("/set-premium-status", isAuthenticated, setPremiumStatus);
 
 module.exports = router;

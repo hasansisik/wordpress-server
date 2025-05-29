@@ -53,6 +53,49 @@ const verifyEmail = async (req, res) => {
   }
 };
 
+// Premium Status Update
+const setPremiumStatus = async (req, res) => {
+  try {
+    const { isPremium } = req.body;
+    const userId = req.user.userId;
+
+    if (isPremium === undefined) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: "Premium durum bilgisi gereklidir.",
+      });
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        message: "Kullanıcı bulunamadı.",
+      });
+    }
+
+    user.isPremium = isPremium;
+    await user.save();
+
+    return res.status(StatusCodes.OK).json({
+      message: `Premium durum başarıyla ${isPremium ? 'etkinleştirildi' : 'devre dışı bırakıldı'}.`,
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        isPremium: user.isPremium,
+        profile: user.profile,
+        companyId: user.companyId,
+      },
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: "Premium durum güncellenirken bir hata oluştu.",
+      error: error.message,
+    });
+  }
+};
+
 //Again Email
 const againEmail = async (req, res) => {
   const { email } = req.body;
@@ -139,7 +182,7 @@ const login = async (req, res, next) => {
       );
     }
     const user = await User.findOne({ email }).select(
-      "auth profile name email role status companyId"
+      "auth profile name email role status companyId isPremium"
     );
 
     if (!user) {
@@ -196,6 +239,7 @@ const login = async (req, res, next) => {
         email: user.email,
         role: user.role,
         companyId: user.companyId,
+        isPremium: user.isPremium,
         token: accessToken,
       },
     });
@@ -641,4 +685,5 @@ module.exports = {
   editUsers,
   deleteUser,
   registerUser,
+  setPremiumStatus,
 };

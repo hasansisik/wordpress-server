@@ -14,6 +14,16 @@ const GeneralSchema = new mongoose.Schema(
       type: String,
       default: ""
     },
+    theme: {
+      headerStyle: {
+        type: Number,
+        default: 1
+      },
+      footerStyle: {
+        type: Number,
+        default: 1
+      }
+    },
     cloudinary: {
       cloudName: {
         type: String,

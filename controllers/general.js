@@ -20,6 +20,7 @@ const updateGeneral = async (req, res) => {
     siteName,
     siteDescription,
     favicon,
+    theme,
     cloudinary,
     whatsapp,
     colors,
@@ -36,6 +37,12 @@ const updateGeneral = async (req, res) => {
   if (siteName !== undefined) general.siteName = siteName;
   if (siteDescription !== undefined) general.siteDescription = siteDescription;
   if (favicon !== undefined) general.favicon = favicon;
+  
+  // Update theme settings if provided
+  if (theme) {
+    if (theme.headerStyle !== undefined) general.theme.headerStyle = theme.headerStyle;
+    if (theme.footerStyle !== undefined) general.theme.footerStyle = theme.footerStyle;
+  }
   
   // Update cloudinary settings if provided
   if (cloudinary) {

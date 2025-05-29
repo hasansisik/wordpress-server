@@ -43,6 +43,7 @@ const UserSchema = new mongoose.Schema(
     },
     role: { type: String, enum: ["admin", "user", "editor"], default: "user" },
     isVerified: { type: Boolean, default: false },
+    isPremium: { type: Boolean, default: false }, // Premium user status
     address: AddressSchema, // Adres alt şeması
     auth: AuthSchema, // Kimlik doğrulama alt şeması
     profile: ProfileSchema, // Profil bilgileri alt şeması

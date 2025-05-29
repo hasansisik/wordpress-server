@@ -301,7 +301,7 @@ const editProfile = async (req, res) => {
       throw new CustomError.NotFoundError("User not found");
     }
 
-    const { name, email, password, picture, companyId } = req.body;
+    const { name, email, password, picture, companyId, isPremium, currentPassword, newPassword } = req.body;
 
     // Check permissions
     const isAdmin = requestingUser.role === "admin";
@@ -316,7 +316,42 @@ const editProfile = async (req, res) => {
       );
     }
 
-    // Only admin can change passwords
+    // Password change logic for regular users
+    if (currentPassword && newPassword && isOwnProfile) {
+      // Fetch user with password
+      const userWithPassword = await User.findById(targetUser._id).select('+auth.password');
+      
+      if (!userWithPassword || !userWithPassword.auth) {
+        throw new CustomError.NotFoundError("Kullanıcı bulunamadı");
+      }
+      
+      // Check if current password is correct
+      const isPasswordValid = await userWithPassword.auth.comparePassword(currentPassword);
+      
+      if (!isPasswordValid) {
+        throw new CustomError.UnauthorizedError("Mevcut şifre hatalı");
+      }
+      
+      // Set the new password
+      userWithPassword.auth.password = newPassword;
+      await userWithPassword.save();
+      
+      return res.status(StatusCodes.OK).json({
+        success: true,
+        message: "Şifre başarıyla güncellendi",
+        user: {
+          _id: userWithPassword._id,
+          name: userWithPassword.name,
+          email: userWithPassword.email,
+          profile: userWithPassword.profile,
+          role: userWithPassword.role,
+          isPremium: userWithPassword.isPremium,
+          companyId: userWithPassword.companyId,
+        },
+      });
+    }
+
+    // Only admin can change passwords with direct password field
     if (password && !isAdmin) {
       throw new CustomError.UnauthorizedError(
         "Şifre değişikliği sadece admin tarafından yapılabilir"
@@ -327,6 +362,13 @@ const editProfile = async (req, res) => {
     if (companyId && !isAdmin) {
       throw new CustomError.UnauthorizedError(
         "Şirket bilgisi değişikliği sadece admin tarafından yapılabilir"
+      );
+    }
+
+    // Only admin can change premium status
+    if (isPremium !== undefined && !isAdmin) {
+      throw new CustomError.UnauthorizedError(
+        "Premium üyelik durumu değişikliği sadece admin tarafından yapılabilir"
       );
     }
 
@@ -347,6 +389,7 @@ const editProfile = async (req, res) => {
     if (password && isAdmin) targetUser.auth.password = password;
     if (picture) targetUser.profile.picture = picture;
     if (companyId && isAdmin) targetUser.companyId = companyId;
+    if (isPremium !== undefined && isAdmin) targetUser.isPremium = isPremium;
 
     await targetUser.save();
 
@@ -359,6 +402,7 @@ const editProfile = async (req, res) => {
         email: targetUser.email,
         profile: targetUser.profile,
         role: targetUser.role,
+        isPremium: targetUser.isPremium,
         companyId: targetUser.companyId,
       },
     });
@@ -407,7 +451,7 @@ const getAllUsers = async (req, res) => {
 const editUsers = async (req, res) => {
   try {
     const { userId } = req.params;
-    const { name, email, password, role, status, picture, companyId } =
+    const { name, email, password, role, status, picture, companyId, isPremium } =
       req.body;
 
     const admin = await User.findById(req.user.userId);
@@ -449,6 +493,7 @@ const editUsers = async (req, res) => {
     if (role) user.role = role;
     if (status !== undefined) user.status = status;
     if (picture) user.profile.picture = picture;
+    if (isPremium !== undefined) user.isPremium = isPremium;
     // Company ID can only be changed to the admin's own company ID
     if (companyId && companyId === admin.companyId) {
       user.companyId = companyId;
@@ -465,6 +510,7 @@ const editUsers = async (req, res) => {
         role: user.role,
         status: user.status,
         profile: user.profile,
+        isPremium: user.isPremium,
         companyId: user.companyId,
       },
     });

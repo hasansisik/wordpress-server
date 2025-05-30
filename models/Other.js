@@ -289,6 +289,168 @@ const OtherSchema = new mongoose.Schema(
         }
       }
     },
+    services3: {
+      badge: {
+        type: String,
+        default: "What we offers"
+      },
+      badgeVisible: {
+        type: Boolean,
+        default: true
+      },
+      badgeBackgroundColor: {
+        type: String,
+        default: "#f1f0fe"
+      },
+      badgeTextColor: {
+        type: String,
+        default: "#6342EC"
+      },
+      title: {
+        type: String,
+        default: "The Leading <span class=\"fw-bold\">IT Solutions <br class=\"d-lg-block d-none\" /> Company</span> For You"
+      },
+      titleColor: {
+        type: String,
+        default: "#111827"
+      },
+      backgroundColor: {
+        type: String,
+        default: "#ffffff"
+      },
+      slideDelay: {
+        type: Number,
+        default: 4000
+      },
+      slideServices: {
+        type: Array,
+        default: [
+          {
+            icon: "/assets/imgs/service-3/icon-1.svg",
+            title: "IT Consulting",
+            description: "Beauis utter enim amet lacus ornare ullamcorper Praesent neque purus rhoncus.",
+            iconBgColor: "bg-primary-soft",
+            link: "#"
+          },
+          {
+            icon: "/assets/imgs/service-3/icon-2.svg",
+            title: "Network Design",
+            description: "Beauis utter enim amet lacus ornare ullamcorper Praesent neque purus rhoncus.",
+            iconBgColor: "bg-primary-soft",
+            link: "#"
+          },
+          {
+            icon: "/assets/imgs/service-3/icon-3.svg",
+            title: "Software Dev",
+            description: "Beauis utter enim amet lacus ornare ullamcorper Praesent neque purus rhoncus.",
+            iconBgColor: "bg-primary-soft",
+            link: "#"
+          },
+          {
+            icon: "/assets/imgs/service-3/icon-4.svg",
+            title: "IT Training",
+            description: "Beauis utter enim amet lacus ornare ullamcorper Praesent neque purus rhoncus.",
+            iconBgColor: "bg-primary-soft",
+            link: "#"
+          }
+        ]
+      },
+      showNavigation: {
+        type: Boolean,
+        default: true
+      },
+      navButtonColor: {
+        type: String,
+        default: "#ffffff"
+      }
+    },
+    team1: {
+      badge: {
+        type: String,
+        default: "OUR TEAM MEMBERS"
+      },
+      badgeVisible: {
+        type: Boolean,
+        default: true
+      },
+      badgeBackgroundColor: {
+        type: String,
+        default: "#f1f0fe"
+      },
+      badgeTextColor: {
+        type: String,
+        default: "#6342EC"
+      },
+      title: {
+        type: String,
+        default: "Meet Our Team"
+      },
+      titleColor: {
+        type: String,
+        default: "#111827"
+      },
+      description: {
+        type: String,
+        default: "Meet the talented and passionate team members who drive our company forward every day. <br class=\"d-none d-lg-block\" /> company forward every day."
+      },
+      descriptionColor: {
+        type: String,
+        default: "#6E6E6E"
+      },
+      backgroundColor: {
+        type: String,
+        default: "#ffffff"
+      },
+      bgLine: {
+        type: String,
+        default: "/assets/imgs/team-1/bg-line.png"
+      },
+      showBgLine: {
+        type: Boolean,
+        default: true
+      },
+      teamMembers: {
+        type: Array,
+        default: [
+          {
+            image: "/assets/imgs/team-1/avatar-1.png",
+            link: "#"
+          },
+          {
+            image: "/assets/imgs/team-1/avatar-2.png",
+            link: "#"
+          },
+          {
+            image: "/assets/imgs/team-1/avatar-3.png",
+            link: "#"
+          },
+          {
+            image: "/assets/imgs/team-1/avatar-4.png",
+            link: "#"
+          },
+          {
+            image: "/assets/imgs/team-1/avatar-5.png",
+            link: "#"
+          },
+          {
+            image: "/assets/imgs/team-1/avatar-6.png",
+            link: "#"
+          },
+          {
+            image: "/assets/imgs/team-1/avatar-7.png",
+            link: "#"
+          },
+          {
+            image: "/assets/imgs/team-1/avatar-8.png",
+            link: "#"
+          }
+        ]
+      },
+      showRotatingElements: {
+        type: Boolean,
+        default: true
+      }
+    },
     contact1: {
       badge: {
         type: String,

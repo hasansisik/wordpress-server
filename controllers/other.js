@@ -23,6 +23,8 @@ const updateOther = async (req, res) => {
     blog3,
     blog5,
     services2,
+    services3,
+    team1,
     contact1,
     services5,
     project2
@@ -130,6 +132,38 @@ const updateOther = async (req, res) => {
         if (services2.buttons.secondary.textColor !== undefined) other.services2.buttons.secondary.textColor = services2.buttons.secondary.textColor;
       }
     }
+  }
+  
+  // Update services3 properties if they exist
+  if (services3) {
+    if (services3.badge !== undefined) other.services3.badge = services3.badge;
+    if (services3.badgeVisible !== undefined) other.services3.badgeVisible = services3.badgeVisible;
+    if (services3.badgeBackgroundColor !== undefined) other.services3.badgeBackgroundColor = services3.badgeBackgroundColor;
+    if (services3.badgeTextColor !== undefined) other.services3.badgeTextColor = services3.badgeTextColor;
+    if (services3.title !== undefined) other.services3.title = services3.title;
+    if (services3.titleColor !== undefined) other.services3.titleColor = services3.titleColor;
+    if (services3.backgroundColor !== undefined) other.services3.backgroundColor = services3.backgroundColor;
+    if (services3.slideDelay !== undefined) other.services3.slideDelay = services3.slideDelay;
+    if (services3.slideServices !== undefined) other.services3.slideServices = services3.slideServices;
+    if (services3.showNavigation !== undefined) other.services3.showNavigation = services3.showNavigation;
+    if (services3.navButtonColor !== undefined) other.services3.navButtonColor = services3.navButtonColor;
+  }
+  
+  // Update team1 properties if they exist
+  if (team1) {
+    if (team1.badge !== undefined) other.team1.badge = team1.badge;
+    if (team1.badgeVisible !== undefined) other.team1.badgeVisible = team1.badgeVisible;
+    if (team1.badgeBackgroundColor !== undefined) other.team1.badgeBackgroundColor = team1.badgeBackgroundColor;
+    if (team1.badgeTextColor !== undefined) other.team1.badgeTextColor = team1.badgeTextColor;
+    if (team1.title !== undefined) other.team1.title = team1.title;
+    if (team1.titleColor !== undefined) other.team1.titleColor = team1.titleColor;
+    if (team1.description !== undefined) other.team1.description = team1.description;
+    if (team1.descriptionColor !== undefined) other.team1.descriptionColor = team1.descriptionColor;
+    if (team1.backgroundColor !== undefined) other.team1.backgroundColor = team1.backgroundColor;
+    if (team1.bgLine !== undefined) other.team1.bgLine = team1.bgLine;
+    if (team1.showBgLine !== undefined) other.team1.showBgLine = team1.showBgLine;
+    if (team1.teamMembers !== undefined) other.team1.teamMembers = team1.teamMembers;
+    if (team1.showRotatingElements !== undefined) other.team1.showRotatingElements = team1.showRotatingElements;
   }
   
   // Update contact1 properties if they exist

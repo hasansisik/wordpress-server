@@ -24,7 +24,8 @@ const updateGeneral = async (req, res) => {
     cloudinary,
     whatsapp,
     colors,
-    seo
+    seo,
+    iyzico
   } = req.body;
   
   // Get the current general settings or create if it doesn't exist
@@ -49,6 +50,13 @@ const updateGeneral = async (req, res) => {
     if (cloudinary.cloudName !== undefined) general.cloudinary.cloudName = cloudinary.cloudName;
     if (cloudinary.apiKey !== undefined) general.cloudinary.apiKey = cloudinary.apiKey;
     if (cloudinary.apiSecret !== undefined) general.cloudinary.apiSecret = cloudinary.apiSecret;
+  }
+  
+  // Update iyzico settings if provided
+  if (iyzico) {
+    if (iyzico.apiKey !== undefined) general.iyzico.apiKey = iyzico.apiKey;
+    if (iyzico.secretKey !== undefined) general.iyzico.secretKey = iyzico.secretKey;
+    if (iyzico.uri !== undefined) general.iyzico.uri = iyzico.uri;
   }
   
   // Update whatsapp settings if provided

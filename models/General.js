@@ -38,6 +38,20 @@ const GeneralSchema = new mongoose.Schema(
         default: "rlJxEB-nHt5b6dIywf57q_fc0iE"
       }
     },
+    iyzico: {
+      apiKey: {
+        type: String,
+        default: "sandbox-OwAK76eKxLfPmFS3uF65m3yOsohhKD3B"
+      },
+      secretKey: {
+        type: String,
+        default: "sandbox-P5Ppp3OxgdCQnfbCoZcaUEacUdv54l6i"
+      },
+      uri: {
+        type: String,
+        default: "https://sandbox-api.iyzipay.com"
+      }
+    },
     whatsapp: {
       enabled: {
         type: Boolean,

@@ -40,7 +40,7 @@ const getAllBlogs = async (req, res) => {
     const { companyId, category } = req.query;
     
     // Build filter based on query parameters
-    let filter = {};
+    let filter = { isSystemCategory: { $ne: true } }; // Exclude system category placeholders
     
     // If companyId is provided, filter by it
     if (companyId) {
@@ -422,45 +422,77 @@ const createGlobalCategory = async (req, res) => {
       });
     }
     
-    // Check if user is admin
-    if (user.role !== 'admin') {
+    // Check if user is admin or editor
+    if (user.role !== 'admin' && user.role !== 'editor') {
       return res.status(StatusCodes.FORBIDDEN).json({
         success: false,
-        message: "Bu işlemi yapmak için admin yetkisine sahip olmalısınız"
+        message: "Bu işlemi yapmak için admin veya editör yetkisine sahip olmalısınız"
       });
     }
     
-    // Check if category already exists in any blog
-    const existingCategory = await Blog.findOne({ category: name });
-    if (existingCategory) {
+    // Check if category already exists by using aggregate query
+    const existingCategories = await Blog.aggregate([
+      { $unwind: "$category" },
+      { $group: { _id: "$category" } },
+      { $match: { _id: name } }
+    ]);
+    
+    if (existingCategories.length > 0) {
       return res.status(StatusCodes.BAD_REQUEST).json({
         success: false,
         message: "Bu kategori zaten mevcut"
       });
     }
     
-    // Create a dummy blog post with the new category
-    // This approach uses existing infrastructure for category management
-    const categoryPlaceholder = await Blog.create({
-      title: `Category: ${name}`,
-      description: "Category placeholder",
-      image: "/assets/imgs/placeholder.png",
-      category: [name],
-      author: user.name || "System",
-      content: {
-        intro: "Category placeholder",
-        readTime: "1 min",
-        author: {
-          name: user.name || "System",
-          avatar: "/assets/imgs/blog-4/avatar-1.png",
-          date: new Date().toISOString()
-        },
-        mainImage: "/assets/imgs/placeholder.png",
-        fullContent: "Category placeholder"
-      },
-      user: user._id,
-      companyId: user.companyId
-    });
+    // Find an existing blog to add the category to (instead of creating a new one)
+    // This is just to ensure the category appears in the category list
+    let blogToUpdate = await Blog.findOne({ user: user._id });
+    
+    if (blogToUpdate) {
+      // If user has a blog, add the category to it
+      if (!Array.isArray(blogToUpdate.category)) {
+        blogToUpdate.category = [blogToUpdate.category].filter(Boolean);
+      }
+      
+      blogToUpdate.category.push(name);
+      await blogToUpdate.save();
+    } else {
+      // Find any blog to add the category to (preferably by the same company)
+      blogToUpdate = await Blog.findOne({ companyId: user.companyId });
+      
+      if (blogToUpdate) {
+        if (!Array.isArray(blogToUpdate.category)) {
+          blogToUpdate.category = [blogToUpdate.category].filter(Boolean);
+        }
+        
+        blogToUpdate.category.push(name);
+        await blogToUpdate.save();
+      } else {
+        // If no blog exists at all, add the category to the system categories list
+        // We'll create a small dummy blog with hidden flag that won't appear in listings
+        const categoryPlaceholder = await Blog.create({
+          title: `_system_category_${name}`,
+          description: "_system_category_placeholder",
+          image: "/assets/imgs/placeholder.png",
+          category: [name],
+          author: "System",
+          content: {
+            intro: "_system_category_placeholder",
+            readTime: "1 min",
+            author: {
+              name: "System",
+              avatar: "/assets/imgs/blog-4/avatar-1.png",
+              date: new Date().toISOString()
+            },
+            mainImage: "/assets/imgs/placeholder.png",
+            fullContent: "_system_category_placeholder"
+          },
+          user: user._id,
+          companyId: user.companyId,
+          isSystemCategory: true  // This field can be used to filter out system categories from blog lists
+        });
+      }
+    }
     
     res.status(StatusCodes.CREATED).json({
       success: true,
@@ -490,16 +522,25 @@ const deleteGlobalCategory = async (req, res) => {
       });
     }
     
-    // Check if user is admin
-    if (user.role !== 'admin') {
+    // Check if user is admin or editor
+    if (user.role !== 'admin' && user.role !== 'editor') {
       return res.status(StatusCodes.FORBIDDEN).json({
         success: false,
-        message: "Bu işlemi yapmak için admin yetkisine sahip olmalısınız"
+        message: "Bu işlemi yapmak için admin veya editör yetkisine sahip olmalısınız"
       });
     }
     
-    // Find all blogs with this category
-    const blogs = await Blog.find({ category: category });
+    // Delete any system category placeholder posts with this category
+    await Blog.deleteMany({ 
+      isSystemCategory: true,
+      title: `_system_category_${category}`
+    });
+    
+    // Find all regular blogs with this category
+    const blogs = await Blog.find({ 
+      category: category,
+      isSystemCategory: { $ne: true }
+    });
     
     // Remove the category from all blogs
     for (const blog of blogs) {

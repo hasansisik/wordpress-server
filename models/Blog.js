@@ -25,6 +25,7 @@ const BlogSchema = new mongoose.Schema(
     content: { type: BlogContentSchema, required: true },
     link: { type: String },
     premium: { type: Boolean, default: false },
+    isSystemCategory: { type: Boolean, default: false },
     user: {
       type: mongoose.Schema.ObjectId,
       ref: "User",

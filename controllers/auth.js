@@ -610,7 +610,6 @@ const deleteUser = async (req, res) => {
 const registerUser = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
-    console.log(name, email, password);
 
     //check email
     const emailAlreadyExists = await User.findOne({ email });

@@ -88,11 +88,9 @@ const getSingleService = async (req, res) => {
 const updateService = async (req, res) => {
   try {
     const { id: serviceId } = req.params;
-    console.log("serviceId", serviceId);
     
     // Get user to check permissions
     const user = await User.findById(req.user.userId);
-    console.log("user", user);
     if (!user) {
       return res.status(StatusCodes.UNAUTHORIZED).json({
         success: false,

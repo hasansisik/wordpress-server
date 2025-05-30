@@ -193,8 +193,6 @@ const updateFeatures = async (req, res) => {
               }
             });
             
-            // Log updated section for debugging
-            console.log("Updated section:", features.features5.sections[sectionIndex]);
           }
         }
         // Reorder sections

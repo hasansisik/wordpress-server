@@ -192,6 +192,99 @@ const HeroSchema = new mongoose.Schema(
         }
       }
     },
+    hero2: {
+      autoplay: {
+        type: Boolean,
+        default: true
+      },
+      slideDelay: {
+        type: Number,
+        default: 4000
+      },
+      showNavigation: {
+        type: Boolean,
+        default: true
+      },
+      navigationButtonColor: {
+        type: String,
+        default: "#ffffff"
+      },
+      paginationVisible: {
+        type: Boolean,
+        default: true
+      },
+      videoId: {
+        type: String,
+        default: "gXFATcwrO-U"
+      },
+      badgeBackgroundColor: {
+        type: String,
+        default: "rgba(255, 255, 255, 0.5)"
+      },
+      badgeTextColor: {
+        type: String,
+        default: "#6342EC"
+      },
+      badgeBorderColor: {
+        type: String,
+        default: "rgba(99, 66, 236, 0.3)"
+      },
+      titleColor: {
+        type: String,
+        default: "#111827"
+      },
+      descriptionColor: {
+        type: String,
+        default: "#4B5563"
+      },
+      primaryButtonBackgroundColor: {
+        type: String,
+        default: "linear-gradient(90deg, #6342EC 0%, #4731D8 100%)"
+      },
+      primaryButtonTextColor: {
+        type: String,
+        default: "#FFFFFF"
+      },
+      videoButtonBackgroundColor: {
+        type: String,
+        default: "rgba(255, 255, 255, 0.3)"
+      },
+      videoButtonTextColor: {
+        type: String,
+        default: "#111827"
+      },
+      videoButtonIconColor: {
+        type: String,
+        default: "#111827"
+      },
+      slides: {
+        type: Array,
+        default: [
+          {
+            backgroundImage: "/assets/imgs/hero-5/img-bg-1.png",
+            badge: "🚀 Welcome to Infinia",
+            title: "Best Solutions for Innovation",
+            description: "Infinia offers full range of consultancy training methods for business consultation.",
+            primaryButtonText: "View Our Services",
+            primaryButtonLink: "#",
+            videoButtonVisible: true,
+            videoButtonText: "Video Guide",
+            lineImage: "/assets/imgs/hero-5/img-bg-line.png"
+          },
+          {
+            backgroundImage: "/assets/imgs/hero-5/img-bg-2.png",
+            badge: "🚀 Welcome to Infinia",
+            title: "Best Solutions for Innovation",
+            description: "Infinia offers full range of consultancy training methods for business consultation.",
+            primaryButtonText: "View Our Services",
+            primaryButtonLink: "#",
+            videoButtonVisible: true,
+            videoButtonText: "Video Guide",
+            lineImage: "/assets/imgs/hero-5/img-bg-line.png"
+          }
+        ]
+      }
+    },
     hero3: {
       badge: {
         visible: {

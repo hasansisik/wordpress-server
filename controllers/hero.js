@@ -19,6 +19,7 @@ const updateHero = async (req, res) => {
   const { 
     activeHero,
     hero1,
+    hero2,
     hero3
   } = req.body;
   
@@ -91,6 +92,48 @@ const updateHero = async (req, res) => {
         if (hero1.card.button.textColor !== undefined) hero.hero1.card.button.textColor = hero1.card.button.textColor;
         if (hero1.card.button.iconColor !== undefined) hero.hero1.card.button.iconColor = hero1.card.button.iconColor;
       }
+    }
+  }
+  
+  if (hero2) {
+    // Update hero2 properties if they exist
+    if (hero2.autoplay !== undefined) hero.hero2.autoplay = hero2.autoplay;
+    if (hero2.slideDelay !== undefined) hero.hero2.slideDelay = hero2.slideDelay;
+    if (hero2.showNavigation !== undefined) hero.hero2.showNavigation = hero2.showNavigation;
+    if (hero2.navigationButtonColor !== undefined) hero.hero2.navigationButtonColor = hero2.navigationButtonColor;
+    if (hero2.paginationVisible !== undefined) hero.hero2.paginationVisible = hero2.paginationVisible;
+    if (hero2.videoId !== undefined) hero.hero2.videoId = hero2.videoId;
+    if (hero2.badgeBackgroundColor !== undefined) hero.hero2.badgeBackgroundColor = hero2.badgeBackgroundColor;
+    if (hero2.badgeTextColor !== undefined) hero.hero2.badgeTextColor = hero2.badgeTextColor;
+    if (hero2.badgeBorderColor !== undefined) hero.hero2.badgeBorderColor = hero2.badgeBorderColor;
+    if (hero2.titleColor !== undefined) hero.hero2.titleColor = hero2.titleColor;
+    if (hero2.descriptionColor !== undefined) hero.hero2.descriptionColor = hero2.descriptionColor;
+    if (hero2.primaryButtonBackgroundColor !== undefined) hero.hero2.primaryButtonBackgroundColor = hero2.primaryButtonBackgroundColor;
+    if (hero2.primaryButtonTextColor !== undefined) hero.hero2.primaryButtonTextColor = hero2.primaryButtonTextColor;
+    if (hero2.videoButtonBackgroundColor !== undefined) hero.hero2.videoButtonBackgroundColor = hero2.videoButtonBackgroundColor;
+    if (hero2.videoButtonTextColor !== undefined) hero.hero2.videoButtonTextColor = hero2.videoButtonTextColor;
+    if (hero2.videoButtonIconColor !== undefined) hero.hero2.videoButtonIconColor = hero2.videoButtonIconColor;
+    
+    // Handle slides array
+    if (hero2.slides && Array.isArray(hero2.slides)) {
+      // Replace the entire slides array
+      hero.hero2.slides = [...hero2.slides];
+      
+      // Ensure each slide has all required properties
+      hero.hero2.slides = hero.hero2.slides.map(slide => {
+        // Default slide properties if any are missing
+        return {
+          backgroundImage: slide.backgroundImage || "/assets/imgs/hero-5/img-bg-1.png",
+          badge: slide.badge || "🚀 Welcome to Infinia",
+          title: slide.title || "Slide Title",
+          description: slide.description || "Slide description",
+          primaryButtonText: slide.primaryButtonText || "View Services",
+          primaryButtonLink: slide.primaryButtonLink || "#",
+          videoButtonVisible: slide.videoButtonVisible !== undefined ? slide.videoButtonVisible : true,
+          videoButtonText: slide.videoButtonText || "Video Guide",
+          lineImage: slide.lineImage || "/assets/imgs/hero-5/img-bg-line.png"
+        };
+      });
     }
   }
   

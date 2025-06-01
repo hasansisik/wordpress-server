@@ -5,6 +5,7 @@ const cors = require("cors");
 const express = require("express");
 const app = express();
 
+
 // CORS configuration
 app.use(cors({
   origin: function(origin, callback) {

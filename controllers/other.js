@@ -197,6 +197,7 @@ const updateOther = async (req, res) => {
     if (contact1.buttonColor !== undefined) other.contact1.buttonColor = contact1.buttonColor;
     if (contact1.buttonTextColor !== undefined) other.contact1.buttonTextColor = contact1.buttonTextColor;
     if (contact1.badgeColor !== undefined) other.contact1.badgeColor = contact1.badgeColor;
+    if (contact1.badgeTextColor !== undefined) other.contact1.badgeTextColor = contact1.badgeTextColor;
   }
   
   // Update services5 properties if they exist

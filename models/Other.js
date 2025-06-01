@@ -574,6 +574,10 @@ const OtherSchema = new mongoose.Schema(
       badgeColor: {
         type: String,
         default: "rgba(99, 66, 236, 0.1)"
+      },
+      badgeTextColor: {
+        type: String,
+        default: "#6342EC"
       }
     },
     services5: {

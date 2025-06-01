@@ -66,6 +66,97 @@ const GeneralSchema = new mongoose.Schema(
         default: "Merhaba, size nasıl yardımcı olabilirim?"
       }
     },
+    cookieConsent: {
+      enabled: {
+        type: Boolean,
+        default: true
+      },
+      title: {
+        type: String,
+        default: "Gizliliğinize değer veriyoruz"
+      },
+      description: {
+        type: String,
+        default: "Çerezler ile deneyiminizi iyileştiriyoruz. \"Tümünü Kabul Et\" seçeneğine tıklayarak, çerezlerin kullanımına izin vermiş olursunuz."
+      },
+      modalTitle: {
+        type: String,
+        default: "Çerez Tercihlerini Özelleştir"
+      },
+      modalDescription: {
+        type: String,
+        default: "Gezinmenize yardımcı olmak ve belirli işlevleri gerçekleştirmek için çerezleri kullanıyoruz."
+      },
+      necessaryTitle: {
+        type: String,
+        default: "Gerekli"
+      },
+      necessaryDescription: {
+        type: String,
+        default: "Gerekli çerezler, güvenli giriş yapma veya tercih ayarlarınızı düzenleme gibi bu sitenin temel özelliklerini etkinleştirmek için gereklidir."
+      },
+      functionalTitle: {
+        type: String,
+        default: "İşlevsel"
+      },
+      functionalDescription: {
+        type: String,
+        default: "İşlevsel çerezler, web sitesi içeriğini sosyal medya platformlarında paylaşma ve diğer üçüncü taraf özellikleri sağlar."
+      },
+      analyticsTitle: {
+        type: String,
+        default: "Analitik"
+      },
+      analyticsDescription: {
+        type: String,
+        default: "Analitik çerezler, ziyaretçilerin nasıl gezindiğini anlamamıza yardımcı olur ve site performansı hakkında bilgi sağlar."
+      },
+      performanceTitle: {
+        type: String,
+        default: "Performans"
+      },
+      performanceDescription: {
+        type: String,
+        default: "Performans çerezleri, web sitesinin performans ölçümlerini anlayarak kullanıcı deneyimini iyileştirmemize yardımcı olur."
+      },
+      moreInfoText: {
+        type: String,
+        default: "Daha fazla göster"
+      },
+      acceptAllText: {
+        type: String,
+        default: "Tümünü Kabul Et"
+      },
+      rejectAllText: {
+        type: String,
+        default: "Tümünü Reddet"
+      },
+      customizeText: {
+        type: String,
+        default: "Özelleştir"
+      },
+      savePreferencesText: {
+        type: String,
+        default: "Tercihlerimi Kaydet"
+      },
+      alwaysActiveText: {
+        type: String,
+        default: "Aktif"
+      },
+      iconColor: {
+        type: String,
+        default: "#000000"
+      },
+      buttonBgColor: {
+        type: String,
+        default: "#cccccc"
+      },
+      position: {
+        type: String,
+        enum: ["bottom-left", "bottom-right"],
+        default: "bottom-left"
+      }
+    },
     colors: {
       primaryColor: {
         type: String,

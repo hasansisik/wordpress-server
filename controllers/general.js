@@ -23,6 +23,7 @@ const updateGeneral = async (req, res) => {
     theme,
     cloudinary,
     whatsapp,
+    cookieConsent,
     colors,
     seo,
     iyzico
@@ -64,6 +65,32 @@ const updateGeneral = async (req, res) => {
     if (whatsapp.enabled !== undefined) general.whatsapp.enabled = whatsapp.enabled;
     if (whatsapp.phoneNumber !== undefined) general.whatsapp.phoneNumber = whatsapp.phoneNumber;
     if (whatsapp.message !== undefined) general.whatsapp.message = whatsapp.message;
+  }
+  
+  // Update cookie consent settings if provided
+  if (cookieConsent) {
+    if (cookieConsent.enabled !== undefined) general.cookieConsent.enabled = cookieConsent.enabled;
+    if (cookieConsent.title !== undefined) general.cookieConsent.title = cookieConsent.title;
+    if (cookieConsent.description !== undefined) general.cookieConsent.description = cookieConsent.description;
+    if (cookieConsent.modalTitle !== undefined) general.cookieConsent.modalTitle = cookieConsent.modalTitle;
+    if (cookieConsent.modalDescription !== undefined) general.cookieConsent.modalDescription = cookieConsent.modalDescription;
+    if (cookieConsent.necessaryTitle !== undefined) general.cookieConsent.necessaryTitle = cookieConsent.necessaryTitle;
+    if (cookieConsent.necessaryDescription !== undefined) general.cookieConsent.necessaryDescription = cookieConsent.necessaryDescription;
+    if (cookieConsent.functionalTitle !== undefined) general.cookieConsent.functionalTitle = cookieConsent.functionalTitle;
+    if (cookieConsent.functionalDescription !== undefined) general.cookieConsent.functionalDescription = cookieConsent.functionalDescription;
+    if (cookieConsent.analyticsTitle !== undefined) general.cookieConsent.analyticsTitle = cookieConsent.analyticsTitle;
+    if (cookieConsent.analyticsDescription !== undefined) general.cookieConsent.analyticsDescription = cookieConsent.analyticsDescription;
+    if (cookieConsent.performanceTitle !== undefined) general.cookieConsent.performanceTitle = cookieConsent.performanceTitle;
+    if (cookieConsent.performanceDescription !== undefined) general.cookieConsent.performanceDescription = cookieConsent.performanceDescription;
+    if (cookieConsent.moreInfoText !== undefined) general.cookieConsent.moreInfoText = cookieConsent.moreInfoText;
+    if (cookieConsent.acceptAllText !== undefined) general.cookieConsent.acceptAllText = cookieConsent.acceptAllText;
+    if (cookieConsent.rejectAllText !== undefined) general.cookieConsent.rejectAllText = cookieConsent.rejectAllText;
+    if (cookieConsent.customizeText !== undefined) general.cookieConsent.customizeText = cookieConsent.customizeText;
+    if (cookieConsent.savePreferencesText !== undefined) general.cookieConsent.savePreferencesText = cookieConsent.savePreferencesText;
+    if (cookieConsent.alwaysActiveText !== undefined) general.cookieConsent.alwaysActiveText = cookieConsent.alwaysActiveText;
+    if (cookieConsent.iconColor !== undefined) general.cookieConsent.iconColor = cookieConsent.iconColor;
+    if (cookieConsent.buttonBgColor !== undefined) general.cookieConsent.buttonBgColor = cookieConsent.buttonBgColor;
+    if (cookieConsent.position !== undefined) general.cookieConsent.position = cookieConsent.position;
   }
   
   // Update color settings if provided

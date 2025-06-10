@@ -23,6 +23,7 @@ const updateGeneral = async (req, res) => {
     theme,
     cloudinary,
     whatsapp,
+    phone,
     cookieConsent,
     colors,
     seo,
@@ -65,6 +66,12 @@ const updateGeneral = async (req, res) => {
     if (whatsapp.enabled !== undefined) general.whatsapp.enabled = whatsapp.enabled;
     if (whatsapp.phoneNumber !== undefined) general.whatsapp.phoneNumber = whatsapp.phoneNumber;
     if (whatsapp.message !== undefined) general.whatsapp.message = whatsapp.message;
+  }
+  
+  // Update phone settings if provided
+  if (req.body.phone) {
+    if (req.body.phone.enabled !== undefined) general.phone.enabled = req.body.phone.enabled;
+    if (req.body.phone.phoneNumber !== undefined) general.phone.phoneNumber = req.body.phone.phoneNumber;
   }
   
   // Update cookie consent settings if provided

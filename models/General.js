@@ -66,6 +66,16 @@ const GeneralSchema = new mongoose.Schema(
         default: "Merhaba, size nasıl yardımcı olabilirim?"
       }
     },
+    phone: {
+      enabled: {
+        type: Boolean,
+        default: true
+      },
+      phoneNumber: {
+        type: String,
+        default: "+905555555555"
+      }
+    },
     cookieConsent: {
       enabled: {
         type: Boolean,

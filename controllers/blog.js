@@ -38,7 +38,7 @@ const createBlog = async (req, res) => {
 // Get all blog posts
 const getAllBlogs = async (req, res) => {
   try {
-    const { companyId, category } = req.query;
+    const { companyId, category, author } = req.query;
     
     // Build filter based on query parameters
     let filter = { isSystemCategory: { $ne: true } }; // Exclude system category placeholders
@@ -52,6 +52,14 @@ const getAllBlogs = async (req, res) => {
     if (category) {
       // Use $in operator to match category in array
       filter.category = { $in: [category] };
+    } else {
+      // If no specific category is requested, exclude "Genel" category from results
+      filter.category = { $nin: ["Genel"] };
+    }
+    
+    // If author is provided, filter by it
+    if (author) {
+      filter.author = author;
     }
     
     const blogs = await Blog.find(filter).sort({ createdAt: -1 });

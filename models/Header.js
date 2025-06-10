@@ -27,6 +27,16 @@ const HeaderSchema = new mongoose.Schema(
           default: "Giris",
         },
       },
+      secondActionButton: {
+        href: {
+          type: String,
+          default: "/register",
+        },
+        text: {
+          type: String,
+          default: "Kayıt Ol",
+        },
+      },
     },
     mainMenu: {
       type: Array,
@@ -79,6 +89,10 @@ const HeaderSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    showSecondActionButton: {
+      type: Boolean,
+      default: false,
+    },
     actionButtonText: {
       type: String,
       default: "Giris",
@@ -118,6 +132,26 @@ const HeaderSchema = new mongoose.Schema(
     phoneQuestionText: {
       type: String,
       default: "Have Any Questions?", // Default text
+    },
+    buttonColor: {
+      type: String,
+      default: "#3b71fe", // Default button color
+    },
+    buttonTextColor: {
+      type: String,
+      default: "#ffffff", // Default button text color
+    },
+    secondButtonColor: {
+      type: String,
+      default: "#ffffff", // Default second button color
+    },
+    secondButtonTextColor: {
+      type: String,
+      default: "#3b71fe", // Default second button text color
+    },
+    secondButtonBorderColor: {
+      type: String,
+      default: "#3b71fe", // Default second button border color
     }
   },
   { timestamps: true }

@@ -24,6 +24,7 @@ const updateHeader = async (req, res) => {
     topBarItems,
     showDarkModeToggle,
     showActionButton,
+    showSecondActionButton,
     actionButtonText,
     actionButtonLink,
     headerComponent,
@@ -33,7 +34,12 @@ const updateHeader = async (req, res) => {
     mobileMenuButtonColor,
     phoneIconBgColor,
     phoneIconColor,
-    phoneQuestionText
+    phoneQuestionText,
+    buttonColor,
+    buttonTextColor,
+    secondButtonColor,
+    secondButtonTextColor,
+    secondButtonBorderColor
   } = req.body;
   
   // Get the current header or create one if it doesn't exist
@@ -50,6 +56,7 @@ const updateHeader = async (req, res) => {
   if (topBarItems) header.topBarItems = topBarItems;
   if (showDarkModeToggle !== undefined) header.showDarkModeToggle = showDarkModeToggle;
   if (showActionButton !== undefined) header.showActionButton = showActionButton;
+  if (showSecondActionButton !== undefined) header.showSecondActionButton = showSecondActionButton;
   if (actionButtonText) header.actionButtonText = actionButtonText;
   if (actionButtonLink) header.actionButtonLink = actionButtonLink;
   if (headerComponent) header.headerComponent = headerComponent;
@@ -60,6 +67,11 @@ const updateHeader = async (req, res) => {
   if (phoneIconBgColor) header.phoneIconBgColor = phoneIconBgColor;
   if (phoneIconColor) header.phoneIconColor = phoneIconColor;
   if (phoneQuestionText) header.phoneQuestionText = phoneQuestionText;
+  if (buttonColor) header.buttonColor = buttonColor;
+  if (buttonTextColor) header.buttonTextColor = buttonTextColor;
+  if (secondButtonColor) header.secondButtonColor = secondButtonColor;
+  if (secondButtonTextColor) header.secondButtonTextColor = secondButtonTextColor;
+  if (secondButtonBorderColor) header.secondButtonBorderColor = secondButtonBorderColor;
   
   await header.save();
   

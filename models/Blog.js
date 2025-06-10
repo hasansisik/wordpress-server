@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const BlogAuthorSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  avatar: { type: String, default: "/assets/imgs/blog-4/avatar-1.png" },
+  avatar: { type: String, default: "/assets/imgs/blog-4/avatar.png" },
   date: { type: String }
 });
 

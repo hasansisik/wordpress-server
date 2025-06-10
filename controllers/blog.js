@@ -1,5 +1,6 @@
 const Blog = require("../models/Blog");
 const User = require("../models/User");
+const Author = require("../models/Author");
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
 
@@ -481,7 +482,7 @@ const createGlobalCategory = async (req, res) => {
             readTime: "1 min",
             author: {
               name: "System",
-              avatar: "/assets/imgs/blog-4/avatar-1.png",
+              avatar: "/assets/imgs/blog-4/avatar.png",
               date: new Date().toISOString()
             },
             mainImage: "/assets/imgs/placeholder.png",
@@ -570,6 +571,235 @@ const deleteGlobalCategory = async (req, res) => {
   }
 };
 
+// Get all unique authors
+const getAllAuthors = async (req, res) => {
+  try {
+    // Get user to filter by company
+    let filter = {};
+    
+    // If user is authenticated, filter by company
+    if (req.user) {
+      const user = await User.findById(req.user.userId);
+      if (user) {
+        filter.companyId = user.companyId;
+      }
+    }
+    
+    const authors = await Author.find(filter).sort({ name: 1 });
+    
+    res.status(StatusCodes.OK).json({
+      success: true,
+      count: authors.length,
+      authors
+    });
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "Yazarlar alınırken bir hata oluştu",
+      error: error.message
+    });
+  }
+};
+
+// Create a new global author
+const createGlobalAuthor = async (req, res) => {
+  try {
+    const { name, avatar, bio } = req.body;
+    
+    if (!name || name.trim() === "") {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "Yazar adı gereklidir"
+      });
+    }
+    
+    // Get user to check permissions
+    const user = await User.findById(req.user.userId);
+    if (!user) {
+      return res.status(StatusCodes.UNAUTHORIZED).json({
+        success: false,
+        message: "Kullanıcı bulunamadı"
+      });
+    }
+    
+    // Check if user is admin or editor
+    if (user.role !== 'admin' && user.role !== 'editor') {
+      return res.status(StatusCodes.FORBIDDEN).json({
+        success: false,
+        message: "Bu işlemi yapmak için admin veya editör yetkisine sahip olmalısınız"
+      });
+    }
+    
+    // Check if author already exists in the same company
+    const existingAuthor = await Author.findOne({ 
+      name: name.trim(), 
+      companyId: user.companyId 
+    });
+    
+    if (existingAuthor) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "Bu yazar zaten mevcut"
+      });
+    }
+    
+    // Create new author
+    const author = await Author.create({
+      name: name.trim(),
+      avatar: avatar || "/assets/imgs/blog-4/avatar.png",
+      bio: bio || "",
+      companyId: user.companyId,
+      user: user._id
+    });
+    
+    res.status(StatusCodes.CREATED).json({
+      success: true,
+      message: "Yazar başarıyla oluşturuldu",
+      author
+    });
+  } catch (error) {
+    res.status(StatusCodes.BAD_REQUEST).json({
+      success: false,
+      message: "Yazar oluşturulurken bir hata oluştu",
+      error: error.message
+    });
+  }
+};
+
+// Update an existing global author
+const updateGlobalAuthor = async (req, res) => {
+  try {
+    const { id: authorId } = req.params;
+    const { name, avatar, bio } = req.body;
+    
+    // Get user to check permissions
+    const user = await User.findById(req.user.userId);
+    if (!user) {
+      return res.status(StatusCodes.UNAUTHORIZED).json({
+        success: false,
+        message: "Kullanıcı bulunamadı"
+      });
+    }
+    
+    // Check if user is admin or editor
+    if (user.role !== 'admin' && user.role !== 'editor') {
+      return res.status(StatusCodes.FORBIDDEN).json({
+        success: false,
+        message: "Bu işlemi yapmak için admin veya editör yetkisine sahip olmalısınız"
+      });
+    }
+    
+    // Find the author
+    const author = await Author.findById(authorId);
+    if (!author) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        success: false,
+        message: "Yazar bulunamadı"
+      });
+    }
+    
+    // Check if user can update this author (same company)
+    if (author.companyId !== user.companyId) {
+      return res.status(StatusCodes.FORBIDDEN).json({
+        success: false,
+        message: "Bu yazarı düzenleme yetkiniz yok"
+      });
+    }
+    
+    // Update author
+    const updatedAuthor = await Author.findByIdAndUpdate(
+      authorId,
+      {
+        ...(name && { name: name.trim() }),
+        ...(avatar && { avatar }),
+        ...(bio && { bio })
+      },
+      { new: true, runValidators: true }
+    );
+    
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Yazar başarıyla güncellendi",
+      author: updatedAuthor
+    });
+  } catch (error) {
+    res.status(StatusCodes.BAD_REQUEST).json({
+      success: false,
+      message: "Yazar güncellenirken bir hata oluştu",
+      error: error.message
+    });
+  }
+};
+
+// Delete a global author
+const deleteGlobalAuthor = async (req, res) => {
+  try {
+    const { id: authorId } = req.params;
+    
+    // Get user to check permissions
+    const user = await User.findById(req.user.userId);
+    if (!user) {
+      return res.status(StatusCodes.UNAUTHORIZED).json({
+        success: false,
+        message: "Kullanıcı bulunamadı"
+      });
+    }
+    
+    // Check if user is admin or editor
+    if (user.role !== 'admin' && user.role !== 'editor') {
+      return res.status(StatusCodes.FORBIDDEN).json({
+        success: false,
+        message: "Bu işlemi yapmak için admin veya editör yetkisine sahip olmalısınız"
+      });
+    }
+    
+    // Find the author
+    const author = await Author.findById(authorId);
+    if (!author) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        success: false,
+        message: "Yazar bulunamadı"
+      });
+    }
+    
+    // Check if user can delete this author (same company)
+    if (author.companyId !== user.companyId) {
+      return res.status(StatusCodes.FORBIDDEN).json({
+        success: false,
+        message: "Bu yazarı silme yetkiniz yok"
+      });
+    }
+    
+    // Check if author is used in any blogs
+    const blogsWithAuthor = await Blog.find({ 
+      author: author.name,
+      companyId: user.companyId 
+    });
+    
+    if (blogsWithAuthor.length > 0) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: `Bu yazar ${blogsWithAuthor.length} blog yazısında kullanılıyor. Önce bu yazıları güncelleyin.`
+      });
+    }
+    
+    // Delete author
+    await Author.findByIdAndDelete(authorId);
+    
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Yazar başarıyla silindi",
+      authorId
+    });
+  } catch (error) {
+    res.status(StatusCodes.BAD_REQUEST).json({
+      success: false,
+      message: "Yazar silinirken bir hata oluştu",
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
   createBlog,
   getAllBlogs,
@@ -581,5 +811,9 @@ module.exports = {
   addCategory,
   deleteCategory,
   createGlobalCategory,
-  deleteGlobalCategory
+  deleteGlobalCategory,
+  getAllAuthors,
+  createGlobalAuthor,
+  updateGlobalAuthor,
+  deleteGlobalAuthor
 }; 

@@ -699,6 +699,60 @@ const OtherSchema = new mongoose.Schema(
         type: String,
         default: "#f8f9fa"
       }
+    },
+    content1: {
+      title: {
+        type: String,
+        default: "Content Section"
+      },
+      titleColor: {
+        type: String,
+        default: "#111827"
+      },
+      content: {
+        type: String,
+        default: "<p>Enter your content here...</p>"
+      },
+      backgroundColor: {
+        type: String,
+        default: "#ffffff"
+      }
+    },
+    content2: {
+      title: {
+        type: String,
+        default: "Content Section 2"
+      },
+      titleColor: {
+        type: String,
+        default: "#111827"
+      },
+      content: {
+        type: String,
+        default: "<p>Enter your second content here...</p>"
+      },
+      backgroundColor: {
+        type: String,
+        default: "#f8f9fa"
+      }
+    },
+    content3: {
+      title: {
+        type: String,
+        default: "Content Section 3"
+      },
+      titleColor: {
+        type: String,
+        default: "#111827"
+      },
+      content: {
+        type: String,
+        default: "<p>Enter your third content here...</p>"
+      },
+      backgroundColor: {
+        type: String,
+        default: "#ffffff"
+      }
     }
   },
   { timestamps: true }

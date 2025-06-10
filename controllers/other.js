@@ -27,7 +27,10 @@ const updateOther = async (req, res) => {
     team1,
     contact1,
     services5,
-    project2
+    project2,
+    content1,
+    content2,
+    content3
   } = req.body;
   
   // Get the current other or create one if it doesn't exist
@@ -235,6 +238,30 @@ const updateOther = async (req, res) => {
     if (project2.description !== undefined) other.project2.description = project2.description;
     if (project2.descriptionColor !== undefined) other.project2.descriptionColor = project2.descriptionColor;
     if (project2.backgroundColor !== undefined) other.project2.backgroundColor = project2.backgroundColor;
+  }
+  
+  // Update content1 properties if they exist
+  if (content1) {
+    if (content1.title !== undefined) other.content1.title = content1.title;
+    if (content1.titleColor !== undefined) other.content1.titleColor = content1.titleColor;
+    if (content1.content !== undefined) other.content1.content = content1.content;
+    if (content1.backgroundColor !== undefined) other.content1.backgroundColor = content1.backgroundColor;
+  }
+  
+  // Update content2 properties if they exist
+  if (content2) {
+    if (content2.title !== undefined) other.content2.title = content2.title;
+    if (content2.titleColor !== undefined) other.content2.titleColor = content2.titleColor;
+    if (content2.content !== undefined) other.content2.content = content2.content;
+    if (content2.backgroundColor !== undefined) other.content2.backgroundColor = content2.backgroundColor;
+  }
+  
+  // Update content3 properties if they exist
+  if (content3) {
+    if (content3.title !== undefined) other.content3.title = content3.title;
+    if (content3.titleColor !== undefined) other.content3.titleColor = content3.titleColor;
+    if (content3.content !== undefined) other.content3.content = content3.content;
+    if (content3.backgroundColor !== undefined) other.content3.backgroundColor = content3.backgroundColor;
   }
   
   await other.save();

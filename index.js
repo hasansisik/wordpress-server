@@ -20,6 +20,7 @@ app.use(cors({
   credentials: true
 }));
 
+
 // rest of the packages
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");

@@ -101,6 +101,14 @@ const HeaderSchema = new mongoose.Schema(
       type: String,
       default: "/",
     },
+    secondActionButtonText: {
+      type: String,
+      default: "Kayıt Ol",
+    },
+    secondActionButtonLink: {
+      type: String,
+      default: "/register",
+    },
     headerComponent: {
       type: String,
       default: "Header1",

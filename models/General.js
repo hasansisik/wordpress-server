@@ -24,6 +24,51 @@ const GeneralSchema = new mongoose.Schema(
         default: 1
       }
     },
+    premium: {
+      price: {
+        type: Number,
+        default: 3600
+      },
+      currency: {
+        type: String,
+        default: "TL"
+      },
+      features: {
+        type: Array,
+        default: [
+          "Her ay kapsamını genişlettiğimiz eğitim içeriklerine,",
+          "Üyelere özel gerçekleştirdiğimiz yayınlara katılma hakkına,",
+        ]
+      },
+      ctaText: {
+        type: String,
+        default: "HEMEN KATILIN"
+      },
+      subtitle: {
+        type: String,
+        default: "sahip olursunuz."
+      },
+      yearlyPriceText: {
+        type: String,
+        default: "Üyelik ücreti yıllık 3.600 TL olarak belirlenmiştir."
+      },
+      description: {
+        type: String,
+        default: "Komünite, sunduğu eğitimler, birlikte çalıştığı uzmanlar, sunduğu topluluk öğrenimi fırsatı, üyelerine sağladığı her türlü içerik ve indirimlerden dolayı sadece yıllık olarak ücretlendirilmektedir."
+      },
+      leftTitle: {
+        type: String,
+        default: "Bir defa yap, hep sat!"
+      },
+      leftSubtitle: {
+        type: String,
+        default: "Türkiye'nin en yetenekli yaratıcılarının bir araya geldiği Komünite'ye katılın!"
+      },
+      rightTitle: {
+        type: String,
+        default: "Komünite'ye üye olduğunuzda:"
+      }
+    },
     cloudinary: {
       cloudName: {
         type: String,

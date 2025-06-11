@@ -21,6 +21,7 @@ const updateGeneral = async (req, res) => {
     siteDescription,
     favicon,
     theme,
+    premium,
     cloudinary,
     whatsapp,
     phone,
@@ -45,6 +46,20 @@ const updateGeneral = async (req, res) => {
   if (theme) {
     if (theme.headerStyle !== undefined) general.theme.headerStyle = theme.headerStyle;
     if (theme.footerStyle !== undefined) general.theme.footerStyle = theme.footerStyle;
+  }
+  
+  // Update premium settings if provided
+  if (premium) {
+    if (premium.price !== undefined) general.premium.price = premium.price;
+    if (premium.currency !== undefined) general.premium.currency = premium.currency;
+    if (premium.features !== undefined) general.premium.features = premium.features;
+    if (premium.ctaText !== undefined) general.premium.ctaText = premium.ctaText;
+    if (premium.subtitle !== undefined) general.premium.subtitle = premium.subtitle;
+    if (premium.yearlyPriceText !== undefined) general.premium.yearlyPriceText = premium.yearlyPriceText;
+    if (premium.description !== undefined) general.premium.description = premium.description;
+    if (premium.leftTitle !== undefined) general.premium.leftTitle = premium.leftTitle;
+    if (premium.leftSubtitle !== undefined) general.premium.leftSubtitle = premium.leftSubtitle;
+    if (premium.rightTitle !== undefined) general.premium.rightTitle = premium.rightTitle;
   }
   
   // Update cloudinary settings if provided

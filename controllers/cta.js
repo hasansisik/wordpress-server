@@ -85,6 +85,7 @@ const updateCta = async (req, res) => {
     }
     
     if (cta4.description !== undefined) cta.cta4.description = cta4.description;
+    if (cta4.description2 !== undefined) cta.cta4.description2 = cta4.description2;
     if (cta4.features) cta.cta4.features = cta4.features;
     
     if (cta4.buttons) {

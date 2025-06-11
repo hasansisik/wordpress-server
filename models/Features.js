@@ -257,6 +257,22 @@ const FeaturesSchema = new mongoose.Schema(
       }
     },
     features5: {
+      title: {
+        type: String,
+        default: "Innovative Solutions for Modern Business"
+      },
+      titleColor: {
+        type: String,
+        default: ""
+      },
+      description: {
+        type: String,
+        default: ""
+      },
+      descriptionColor: {
+        type: String,
+        default: ""
+      },
       sections: {
         type: Array,
         default: [

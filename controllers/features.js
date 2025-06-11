@@ -134,6 +134,12 @@ const updateFeatures = async (req, res) => {
   
   // Update features5 properties if they exist
   if (features5) {
+    // Update title and description
+    if (features5.title !== undefined) features.features5.title = features5.title;
+    if (features5.titleColor !== undefined) features.features5.titleColor = features5.titleColor;
+    if (features5.description !== undefined) features.features5.description = features5.description;
+    if (features5.descriptionColor !== undefined) features.features5.descriptionColor = features5.descriptionColor;
+    
     // Handle the sections array
     if (features5.sections) {
       // If completely replacing the sections array

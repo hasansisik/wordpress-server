@@ -9,7 +9,7 @@ const app = express();
 app.use(cors({
   origin: function(origin, callback) {
     // Allow any origin that matches your IP address with any port
-    if (!origin || origin.startsWith('http://192.168.1.58:') || origin === 'http://localhost:3000' || origin === 'https://aver-nextjs-tau.vercel.app') {
+    if (!origin || origin.startsWith('http://192.168.1.58:') || origin === 'http://localhost:3000' || origin === 'https://wordpress-clone-five.vercel.app') {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));

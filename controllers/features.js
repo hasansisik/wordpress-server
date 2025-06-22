@@ -16,14 +16,7 @@ const getFeatures = async (req, res) => {
 
 // Update features
 const updateFeatures = async (req, res) => {
-  const { 
-    activeFeature,
-    features1,
-    features4,
-    features5,
-    features8,
-    features10
-  } = req.body;
+  const updateData = req.body;
   
   // Get the current features or create one if it doesn't exist
   let features = await Features.findOne({});
@@ -31,11 +24,15 @@ const updateFeatures = async (req, res) => {
     features = await Features.create({});
   }
   
+  // Log incoming data for debugging
+  console.log('Updating features with data:', JSON.stringify(updateData, null, 2));
+  
   // Update fields that were provided
-  if (activeFeature !== undefined) features.activeFeature = activeFeature;
+  if (updateData.activeFeature !== undefined) features.activeFeature = updateData.activeFeature;
   
   // Update features1 properties if they exist
-  if (features1) {
+  if (updateData.features1) {
+    const features1 = updateData.features1;
     if (features1.badge) {
       if (features1.badge.visible !== undefined) features.features1.badge.visible = features1.badge.visible;
       if (features1.badge.label !== undefined) features.features1.badge.label = features1.badge.label;
@@ -80,7 +77,8 @@ const updateFeatures = async (req, res) => {
   }
 
   // Update features4 properties if they exist
-  if (features4) {
+  if (updateData.features4) {
+    const features4 = updateData.features4;
     if (features4.badge) {
       if (features4.badge.visible !== undefined) features.features4.badge.visible = features4.badge.visible;
       if (features4.badge.label !== undefined) features.features4.badge.label = features4.badge.label;
@@ -133,7 +131,8 @@ const updateFeatures = async (req, res) => {
   }
   
   // Update features5 properties if they exist
-  if (features5) {
+  if (updateData.features5) {
+    const features5 = updateData.features5;
     // Update title and description
     if (features5.title !== undefined) features.features5.title = features5.title;
     if (features5.titleColor !== undefined) features.features5.titleColor = features5.titleColor;
@@ -226,7 +225,8 @@ const updateFeatures = async (req, res) => {
   }
   
   // Update features8 properties if they exist
-  if (features8) {
+  if (updateData.features8) {
+    const features8 = updateData.features8;
     if (features8.title !== undefined) features.features8.title = features8.title;
     if (features8.description !== undefined) features.features8.description = features8.description;
     if (features8.starIcon !== undefined) features.features8.starIcon = features8.starIcon;
@@ -249,7 +249,8 @@ const updateFeatures = async (req, res) => {
   }
   
   // Update features10 properties if they exist
-  if (features10) {
+  if (updateData.features10) {
+    const features10 = updateData.features10;
     if (features10.backgroundColor !== undefined) features.features10.backgroundColor = features10.backgroundColor;
     if (features10.backgroundImage !== undefined) features.features10.backgroundImage = features10.backgroundImage;
     

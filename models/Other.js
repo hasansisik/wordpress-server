@@ -571,6 +571,18 @@ const OtherSchema = new mongoose.Schema(
         type: String,
         default: "#FFFFFF"
       },
+      buttonText: {
+        type: String,
+        default: "Mesaj Gönder"
+      },
+      buttonSubmittingText: {
+        type: String,
+        default: "Gönderiliyor..."
+      },
+      buttonSubmittedText: {
+        type: String,
+        default: "Gönderildi"
+      },
       badgeColor: {
         type: String,
         default: "rgba(99, 66, 236, 0.1)"

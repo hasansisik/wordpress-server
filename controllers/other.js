@@ -199,6 +199,9 @@ const updateOther = async (req, res) => {
     if (contact1.services !== undefined) other.contact1.services = contact1.services;
     if (contact1.buttonColor !== undefined) other.contact1.buttonColor = contact1.buttonColor;
     if (contact1.buttonTextColor !== undefined) other.contact1.buttonTextColor = contact1.buttonTextColor;
+    if (contact1.buttonText !== undefined) other.contact1.buttonText = contact1.buttonText;
+    if (contact1.buttonSubmittingText !== undefined) other.contact1.buttonSubmittingText = contact1.buttonSubmittingText;
+    if (contact1.buttonSubmittedText !== undefined) other.contact1.buttonSubmittedText = contact1.buttonSubmittedText;
     if (contact1.badgeColor !== undefined) other.contact1.badgeColor = contact1.badgeColor;
     if (contact1.badgeTextColor !== undefined) other.contact1.badgeTextColor = contact1.badgeTextColor;
   }

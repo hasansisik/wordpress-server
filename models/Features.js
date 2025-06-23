@@ -87,7 +87,8 @@ const FeaturesSchema = new mongoose.Schema(
             backgroundColor: "",
             titleColor: "",
             descriptionColor: "",
-            iconBackgroundColor: ""
+            iconBackgroundColor: "",
+            iconColor: ""
           },
           {
             icon: "/assets/imgs/features-1/icon-2.svg",
@@ -96,7 +97,8 @@ const FeaturesSchema = new mongoose.Schema(
             backgroundColor: "",
             titleColor: "",
             descriptionColor: "",
-            iconBackgroundColor: ""
+            iconBackgroundColor: "",
+            iconColor: ""
           },
           {
             icon: "/assets/imgs/features-1/icon-3.svg",
@@ -105,7 +107,8 @@ const FeaturesSchema = new mongoose.Schema(
             backgroundColor: "",
             titleColor: "",
             descriptionColor: "",
-            iconBackgroundColor: ""
+            iconBackgroundColor: "",
+            iconColor: ""
           },
           {
             icon: "/assets/imgs/features-1/icon-4.svg",
@@ -114,7 +117,8 @@ const FeaturesSchema = new mongoose.Schema(
             backgroundColor: "",
             titleColor: "",
             descriptionColor: "",
-            iconBackgroundColor: ""
+            iconBackgroundColor: "",
+            iconColor: ""
           }
         ]
       },
@@ -406,7 +410,8 @@ const FeaturesSchema = new mongoose.Schema(
             backgroundColor: "",
             titleColor: "",
             descriptionColor: "",
-            iconBackgroundColor: ""
+            iconBackgroundColor: "",
+            iconColor: ""
           },
           {
             icon: "/assets/imgs/features-1/icon-2.svg",
@@ -415,7 +420,8 @@ const FeaturesSchema = new mongoose.Schema(
             backgroundColor: "",
             titleColor: "",
             descriptionColor: "",
-            iconBackgroundColor: ""
+            iconBackgroundColor: "",
+            iconColor: ""
           },
           {
             icon: "/assets/imgs/features-1/icon-3.svg",
@@ -424,7 +430,8 @@ const FeaturesSchema = new mongoose.Schema(
             backgroundColor: "",
             titleColor: "",
             descriptionColor: "",
-            iconBackgroundColor: ""
+            iconBackgroundColor: "",
+            iconColor: ""
           },
           {
             icon: "/assets/imgs/features-1/icon-4.svg",
@@ -433,7 +440,8 @@ const FeaturesSchema = new mongoose.Schema(
             backgroundColor: "",
             titleColor: "",
             descriptionColor: "",
-            iconBackgroundColor: ""
+            iconBackgroundColor: "",
+            iconColor: ""
           }
         ]
       },

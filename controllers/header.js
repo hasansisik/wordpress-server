@@ -41,7 +41,9 @@ const updateHeader = async (req, res) => {
     buttonTextColor,
     secondButtonColor,
     secondButtonTextColor,
-    secondButtonBorderColor
+    secondButtonBorderColor,
+    showDestinationsDropdown,
+    destinationsCategories
   } = req.body;
   
   // Get the current header or create one if it doesn't exist
@@ -88,6 +90,8 @@ const updateHeader = async (req, res) => {
   if (secondButtonColor) header.secondButtonColor = secondButtonColor;
   if (secondButtonTextColor) header.secondButtonTextColor = secondButtonTextColor;
   if (secondButtonBorderColor) header.secondButtonBorderColor = secondButtonBorderColor;
+  if (showDestinationsDropdown !== undefined) header.showDestinationsDropdown = showDestinationsDropdown;
+  if (destinationsCategories) header.destinationsCategories = destinationsCategories;
   
   await header.save();
   

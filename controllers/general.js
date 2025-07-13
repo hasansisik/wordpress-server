@@ -155,6 +155,149 @@ const updateGeneral = async (req, res) => {
         };
       }
     }
+    
+    // Update schema settings
+    if (seo.schema) {
+      // Initialize schema object if it doesn't exist
+      if (!general.seo.schema) {
+        general.seo.schema = {
+          organization: {
+            socialLinks: [
+              "https://facebook.com/wordpressclone",
+              "https://twitter.com/wordpressclone",
+              "https://instagram.com/wordpressclone",
+              "https://linkedin.com/company/wordpressclone"
+            ],
+            logo: "/logo.png",
+            address: {
+              streetAddress: "",
+              addressLocality: "",
+              addressRegion: "",
+              postalCode: "",
+              addressCountry: "TR"
+            }
+          },
+          enableWebPageSchema: true,
+          enableBlogPostingSchema: true,
+          enableItemListSchema: true
+        };
+      }
+      
+      // Update organization settings
+      if (seo.schema.organization) {
+        if (seo.schema.organization.socialLinks !== undefined) {
+          general.seo.schema.organization.socialLinks = seo.schema.organization.socialLinks;
+        }
+        if (seo.schema.organization.logo !== undefined) {
+          general.seo.schema.organization.logo = seo.schema.organization.logo;
+        }
+        
+        // Update address
+        if (seo.schema.organization.address) {
+          const address = seo.schema.organization.address;
+          if (address.streetAddress !== undefined) {
+            general.seo.schema.organization.address.streetAddress = address.streetAddress;
+          }
+          if (address.addressLocality !== undefined) {
+            general.seo.schema.organization.address.addressLocality = address.addressLocality;
+          }
+          if (address.addressRegion !== undefined) {
+            general.seo.schema.organization.address.addressRegion = address.addressRegion;
+          }
+          if (address.postalCode !== undefined) {
+            general.seo.schema.organization.address.postalCode = address.postalCode;
+          }
+          if (address.addressCountry !== undefined) {
+            general.seo.schema.organization.address.addressCountry = address.addressCountry;
+          }
+        }
+      }
+      
+      // Update schema feature flags
+      if (seo.schema.enableWebPageSchema !== undefined) {
+        general.seo.schema.enableWebPageSchema = seo.schema.enableWebPageSchema;
+      }
+      if (seo.schema.enableBlogPostingSchema !== undefined) {
+        general.seo.schema.enableBlogPostingSchema = seo.schema.enableBlogPostingSchema;
+      }
+      if (seo.schema.enableItemListSchema !== undefined) {
+        general.seo.schema.enableItemListSchema = seo.schema.enableItemListSchema;
+      }
+    }
+
+    // Update robots.txt settings
+    if (seo.robotsTxt) {
+      // Initialize robotsTxt object if it doesn't exist
+      if (!general.seo.robotsTxt) {
+        general.seo.robotsTxt = {
+          customRules: "",
+          enableDefaultRules: true
+        };
+      }
+      
+      if (seo.robotsTxt.customRules !== undefined) {
+        general.seo.robotsTxt.customRules = seo.robotsTxt.customRules;
+      }
+      if (seo.robotsTxt.enableDefaultRules !== undefined) {
+        general.seo.robotsTxt.enableDefaultRules = seo.robotsTxt.enableDefaultRules;
+      }
+    }
+
+    // Update sitemap settings
+    if (seo.sitemap) {
+      // Initialize sitemap object if it doesn't exist
+      if (!general.seo.sitemap) {
+        general.seo.sitemap = {
+          excludeUrls: [],
+          additionalUrls: [],
+          changeFrequencies: {
+            homepage: "daily",
+            pages: "weekly",
+            posts: "monthly"
+          },
+          priorities: {
+            homepage: 1.0,
+            pages: 0.8,
+            posts: 0.7
+          }
+        };
+      }
+      
+      if (seo.sitemap.excludeUrls !== undefined) {
+        general.seo.sitemap.excludeUrls = seo.sitemap.excludeUrls;
+      }
+      if (seo.sitemap.additionalUrls !== undefined) {
+        general.seo.sitemap.additionalUrls = seo.sitemap.additionalUrls;
+      }
+      
+      // Update change frequencies
+      if (seo.sitemap.changeFrequencies) {
+        const frequencies = seo.sitemap.changeFrequencies;
+        if (frequencies.homepage !== undefined) {
+          general.seo.sitemap.changeFrequencies.homepage = frequencies.homepage;
+        }
+        if (frequencies.pages !== undefined) {
+          general.seo.sitemap.changeFrequencies.pages = frequencies.pages;
+        }
+        if (frequencies.posts !== undefined) {
+          general.seo.sitemap.changeFrequencies.posts = frequencies.posts;
+        }
+      }
+      
+      // Update priorities
+      if (seo.sitemap.priorities) {
+        const priorities = seo.sitemap.priorities;
+        if (priorities.homepage !== undefined) {
+          general.seo.sitemap.priorities.homepage = priorities.homepage;
+        }
+        if (priorities.pages !== undefined) {
+          general.seo.sitemap.priorities.pages = priorities.pages;
+        }
+        if (priorities.posts !== undefined) {
+          general.seo.sitemap.priorities.posts = priorities.posts;
+        }
+      }
+    }
   }
   
   await general.save();

@@ -152,7 +152,6 @@ const updateHizmet = async (req, res) => {
       hizmet
     });
   } catch (error) {
-    console.log("error", error);
     res.status(StatusCodes.BAD_REQUEST).json({
       success: false,
       message: "Hizmet güncellenirken bir hata oluştu",

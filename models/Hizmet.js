@@ -1,5 +1,11 @@
 const mongoose = require("mongoose");
 
+const VideoSchema = new mongoose.Schema({
+  title: { type: String },
+  url: { type: String, required: true },
+  order: { type: Number, default: 0 }
+});
+
 const BeforeAfterItemSchema = new mongoose.Schema({
   title: { type: String },
   description: { type: String },
@@ -32,6 +38,7 @@ const HizmetContentSchema = new mongoose.Schema({
   },
   mainImage: { type: String },
   fullContent: { type: String },
+  videos: [VideoSchema],
   bannerSectionTitle: { type: String },
   bannerSectionDescription: { type: String },
   bannerSectionImage: { type: String },

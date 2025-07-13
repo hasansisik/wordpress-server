@@ -24,8 +24,6 @@ const updateFeatures = async (req, res) => {
     features = await Features.create({});
   }
   
-  // Log incoming data for debugging
-  console.log('Updating features with data:', JSON.stringify(updateData, null, 2));
   
   // Helper function to deep merge objects
   const deepMerge = (target, source) => {

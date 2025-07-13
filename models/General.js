@@ -337,6 +337,114 @@ const GeneralSchema = new mongoose.Schema(
             ogImage: "https://res.cloudinary.com/demo/image/upload/v1493118555/sample5.jpg"
           }
         ]
+      },
+      schema: {
+        organization: {
+          socialLinks: {
+            type: Array,
+            default: [
+              "https://facebook.com/wordpressclone",
+              "https://twitter.com/wordpressclone",
+              "https://instagram.com/wordpressclone",
+              "https://linkedin.com/company/wordpressclone"
+            ]
+          },
+          logo: {
+            type: String,
+            default: "/logo.png"
+          },
+          address: {
+            streetAddress: {
+              type: String,
+              default: ""
+            },
+            addressLocality: {
+              type: String,
+              default: ""
+            },
+            addressRegion: {
+              type: String,
+              default: ""
+            },
+            postalCode: {
+              type: String,
+              default: ""
+            },
+            addressCountry: {
+              type: String,
+              default: "TR"
+            }
+          }
+        },
+        enableWebPageSchema: {
+          type: Boolean,
+          default: true
+        },
+        enableBlogPostingSchema: {
+          type: Boolean,
+          default: true
+        },
+        enableItemListSchema: {
+          type: Boolean,
+          default: true
+        }
+      },
+      robotsTxt: {
+        customRules: {
+          type: String,
+          default: ""
+        },
+        enableDefaultRules: {
+          type: Boolean,
+          default: true
+        }
+      },
+      sitemap: {
+        excludeUrls: {
+          type: Array,
+          default: []
+        },
+        additionalUrls: {
+          type: Array,
+          default: []
+        },
+        changeFrequencies: {
+          homepage: {
+            type: String,
+            enum: ["always", "hourly", "daily", "weekly", "monthly", "yearly", "never"],
+            default: "daily"
+          },
+          pages: {
+            type: String,
+            enum: ["always", "hourly", "daily", "weekly", "monthly", "yearly", "never"],
+            default: "weekly"
+          },
+          posts: {
+            type: String,
+            enum: ["always", "hourly", "daily", "weekly", "monthly", "yearly", "never"],
+            default: "monthly"
+          }
+        },
+        priorities: {
+          homepage: {
+            type: Number,
+            default: 1.0,
+            min: 0.0,
+            max: 1.0
+          },
+          pages: {
+            type: Number,
+            default: 0.8,
+            min: 0.0,
+            max: 1.0
+          },
+          posts: {
+            type: Number,
+            default: 0.7,
+            min: 0.0,
+            max: 1.0
+          }
+        }
       }
     }
   },
